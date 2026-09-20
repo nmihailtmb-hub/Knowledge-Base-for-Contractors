@@ -5,167 +5,311 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>База знаний — Подрядчикам</title>
 <style>
-:root{--bg:#f4f6f9;--card:#fff;--text:#17202a;--muted:#6b7280;--line:#e7ebf0;--accent:#2563eb;--accent2:#1d4ed8;--shadow:0 12px 35px rgba(20,35,55,.08)}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+:root{
+  --bg:#f5f7fb;--card:#fff;--text:#0f172a;--muted:#64748b;--muted2:#94a3b8;
+  --line:#e5e9f0;--accent:#2563eb;--accent2:#1d4ed8;--violet:#7c5cff;--green:#059669;
+  --shadow:0 12px 35px rgba(20,35,55,.08);--shadow-lg:0 24px 60px rgba(20,35,55,.14);
+  --radius:18px;
+}
 *{box-sizing:border-box}
 html,body{height:100%}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}
-header{background:linear-gradient(135deg,#111827,#263449);color:white;padding:28px 5vw 34px}
-.top{max-width:1280px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
+body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+body:before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 0% 0%,rgba(37,99,235,.06),transparent 40%),
+    radial-gradient(circle at 100% 100%,rgba(124,92,255,.05),transparent 40%);
+}
+
+/* ---------- HEADER ---------- */
+header{position:relative;background:linear-gradient(135deg,#0f172a 0%,#1e293b 55%,#0b1220 100%);color:#fff;padding:26px 5vw 30px;overflow:hidden}
+header:before{content:"";position:absolute;inset:0;opacity:.35;pointer-events:none;background:
+  radial-gradient(circle at 15% 20%,rgba(77,141,255,.35),transparent 45%),
+  radial-gradient(circle at 85% 70%,rgba(124,92,255,.28),transparent 50%)}
+.top{position:relative;max-width:1320px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .brand{display:flex;gap:14px;align-items:center}
-.logo{width:46px;height:46px;border-radius:13px;background:#fff;color:#1d4ed8;display:grid;place-items:center;font-weight:800;font-size:20px}
-h1{font-size:25px;margin:0 0 3px}
-.sub{color:#cbd5e1;font-size:14px}
-.hero{max-width:1280px;margin:26px auto 0}
-.hero h2{font-size:34px;margin:0 0 9px}
-.hero p{margin:0;color:#cbd5e1}
-main{max-width:1280px;margin:0 auto;padding:28px 5vw 60px}
-.search{background:var(--card);padding:16px;border-radius:16px;box-shadow:var(--shadow);display:flex;gap:10px}
-.search input{flex:1;border:1px solid var(--line);padding:13px 14px;border-radius:10px;font-size:15px;outline:none}
-.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:700;cursor:pointer;font-family:inherit}
-.primary{background:var(--accent);color:#fff}
-.secondary{background:#eef2f7;color:#17202a}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:21px;box-shadow:0 6px 24px rgba(20,35,55,.04);transition:.18s;cursor:pointer}
-.card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.icon{font-size:28px}
-.card h3{margin:11px 0 6px}
-.muted{color:var(--muted);font-size:14px}
+.logo{width:48px;height:48px;border-radius:14px;background:#fff;color:#1d4ed8;display:grid;place-items:center;font-weight:800;font-size:20px;box-shadow:0 10px 26px rgba(37,99,235,.35)}
+h1{font-size:24px;margin:0 0 3px;letter-spacing:-.4px}
+.sub{color:#cbd5e1;font-size:13.5px}
+.stats{display:flex;gap:10px;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:10px 14px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(255,255,255,.06);backdrop-filter:blur(8px)}
+.stat b{font-size:18px;font-weight:800;line-height:1}
+.stat span{font-size:10.5px;color:#cbd5e1;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.hero{position:relative;max-width:1320px;margin:22px auto 0}
+.hero h2{font-size:28px;margin:0 0 8px;letter-spacing:-.8px;font-weight:800}
+.hero p{margin:0;color:#cbd5e1;font-size:14px;max-width:720px;line-height:1.7}
+
+/* ---------- MAIN ---------- */
+main{max-width:1320px;margin:0 auto;padding:26px 5vw 70px}
+
+/* ---------- SEARCH ---------- */
+.search{background:var(--card);padding:14px;border-radius:16px;box-shadow:var(--shadow);display:flex;gap:10px;position:sticky;top:14px;z-index:20}
+.search .input-wrap{position:relative;flex:1}
+.search .input-wrap:before{content:"🔍";position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;opacity:.7}
+.search input{width:100%;border:1px solid var(--line);padding:13px 14px 13px 40px;border-radius:11px;font-size:14.5px;font-family:inherit;outline:none;background:#f8fafc;transition:.2s;color:var(--text)}
+.search input::placeholder{color:#94a3b8}
+.search input:focus{border-color:var(--accent);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.1)}
+.btn{border:0;border-radius:11px;padding:12px 18px;font-weight:700;cursor:pointer;font-family:inherit;font-size:13.5px;transition:.18s}
+.primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px rgba(37,99,235,.22)}
+.primary:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 10px 24px rgba(37,99,235,.3)}
+.secondary{background:#eef2f7;color:var(--text)}
+.secondary:hover{background:#e2e8f0}
+
+/* ---------- SECTION ---------- */
 .section{margin-top:34px}
-.section-title{display:flex;align-items:end;justify-content:space-between;margin-bottom:13px}
-.section-title h2{margin:0;font-size:21px}
-.empty{padding:30px;text-align:center;color:var(--muted);background:#fff;border:1px dashed #cfd6df;border-radius:14px}
+.section-title{display:flex;align-items:end;justify-content:space-between;margin-bottom:16px;gap:12px;flex-wrap:wrap}
+.section-title h2{margin:0;font-size:20px;letter-spacing:-.4px;font-weight:800;display:flex;align-items:center;gap:10px}
+.section-title h2 .badge{font-size:11px;font-weight:800;background:#eef2ff;color:var(--accent);padding:4px 9px;border-radius:999px;letter-spacing:.04em}
+.section-title .hint{font-size:12.5px;color:var(--muted)}
 
-/* модалка */
-.modal{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+/* ---------- PROJECTS GRID ---------- */
+.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.proj-card{
+  position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px 20px 18px;box-shadow:0 4px 18px rgba(20,35,55,.04);
+  transition:.25s cubic-bezier(.2,.8,.2,1);overflow:hidden;
+}
+.proj-card:before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:3px;border-radius:3px;background:var(--proj-color,#2563eb);transition:.25s}
+.proj-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+.proj-card:hover:before{top:0;bottom:0}
+.proj-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px}
+.proj-icon{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(145deg,#f1f5ff,#e8eeff);border:1px solid #e0e8ff;flex-shrink:0;transition:.25s}
+.proj-card:hover .proj-icon{transform:scale(1.06) rotate(-3deg)}
+.proj-info{flex:1;min-width:0}
+.proj-info h3{margin:0 0 4px;font-size:15.5px;letter-spacing:-.2px;font-weight:800}
+.proj-info .proj-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.proj-counts{display:flex;gap:14px;margin-left:auto;flex-shrink:0;text-align:right}
+.proj-count{display:flex;flex-direction:column;align-items:center}
+.proj-count b{font-size:18px;font-weight:800;line-height:1;color:var(--text)}
+.proj-count span{font-size:9.5px;color:var(--muted2);letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin-top:4px}
+
+.proj-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.proj-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:11px 10px;border-radius:11px;border:1px solid var(--line);
+  background:#f8fafc;color:var(--text);font-family:inherit;font-size:12.5px;font-weight:700;
+  cursor:pointer;transition:.18s;text-align:center;
+}
+.proj-btn:hover:not(:disabled){background:#fff;border-color:var(--accent);color:var(--accent);transform:translateY(-1px);box-shadow:0 6px 16px rgba(37,99,235,.15)}
+.proj-btn:disabled{opacity:.45;cursor:not-allowed}
+.proj-btn .b-ic{font-size:14px}
+
+/* ---------- VIDEOS GRID (общая секция) ---------- */
+.videos{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.video-card{
+  display:flex;align-items:center;gap:14px;padding:14px;
+  border:1px solid var(--line);border-radius:14px;background:var(--card);
+  text-decoration:none;color:inherit;transition:.2s;position:relative;overflow:hidden;
+}
+.video-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent),var(--violet));opacity:.7}
+.video-card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(20,35,55,.1);border-color:transparent}
+.video-card:hover .v-icon{transform:scale(1.08)}
+.v-icon{
+  width:52px;height:52px;border-radius:13px;flex-shrink:0;
+  background:linear-gradient(135deg,#4d8dff,#7c5cff);
+  display:grid;place-items:center;color:#fff;font-weight:800;font-size:22px;
+  box-shadow:0 8px 20px rgba(77,141,255,.35);transition:.25s;position:relative;
+}
+.v-icon:after{content:"↗";font-size:22px;line-height:1}
+.v-main{flex:1;min-width:0}
+.v-name{font-weight:700;font-size:13.5px;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text)}
+.v-desc{color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.4}
+.v-meta{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+.v-chip{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap;letter-spacing:.02em}
+.v-dur{background:#eef2ff;color:var(--accent)}
+.v-proj{background:#f1f5f9;color:#475569}
+.v-hint{font-size:10px;color:var(--muted2);margin-top:4px;letter-spacing:.02em}
+
+/* ---------- EMPTY ---------- */
+.empty{padding:38px 20px;text-align:center;color:var(--muted);background:#fff;border:1px dashed #cfd6df;border-radius:14px;font-size:13.5px}
+.empty .em-ic{font-size:28px;display:block;margin-bottom:8px;opacity:.5}
+
+/* ---------- MODAL ---------- */
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px;z-index:50;animation:fadein .18s}
 .modal.show{display:flex}
-.modal-box{width:min(760px,100%);background:#fff;border-radius:18px;padding:24px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden}
-.modal-box h2{margin:0 0 4px}
-.modal-box .modal-sub{color:var(--muted);font-size:14px;margin-bottom:14px}
-.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:14px;flex-shrink:0}
-
-.modal-search{display:flex;gap:8px;margin-bottom:14px;flex-shrink:0}
-.modal-search input{flex:1;border:1px solid var(--line);padding:10px 12px;border-radius:10px;font-size:14px;outline:none;margin:0}
-
-/* вкладки внутри модалки */
-.tabs{display:flex;gap:6px;margin-bottom:14px;flex-shrink:0;border-bottom:1px solid var(--line);padding-bottom:10px}
-.tab{border:0;background:transparent;color:var(--muted);font-family:inherit;font-weight:700;font-size:13px;padding:8px 14px;border-radius:9px;cursor:pointer;transition:.18s}
-.tab:hover{background:#f1f5f9;color:var(--text)}
-.tab.active{background:var(--accent);color:#fff}
-
-.file-list{
-  flex:1 1 auto;
-  overflow-y:auto;
-  overflow-x:hidden;
-  padding-right:6px;
-  margin-right:-6px;
-  -webkit-overflow-scrolling:touch;
-  min-height:0;
-  max-height:100%;
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.modal-box{
+  width:min(820px,100%);background:#fff;border-radius:22px;
+  max-height:88vh;display:flex;flex-direction:column;overflow:hidden;
+  box-shadow:0 40px 100px rgba(15,23,42,.35);
+  animation:modalIn .28s cubic-bezier(.2,.8,.2,1);
 }
-.file-list::-webkit-scrollbar{width:10px}
-.file-list::-webkit-scrollbar-track{background:#f1f5f9;border-radius:8px}
-.file-list::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:8px}
-.file-list::-webkit-scrollbar-thumb:hover{background:#94a3b8}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.modal-head{padding:22px 24px 14px;border-bottom:1px solid var(--line);flex-shrink:0}
+.crumbs{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);margin-bottom:10px}
+.crumbs .c-link{color:var(--accent);cursor:pointer;font-weight:700;transition:.15s}
+.crumbs .c-link:hover{color:var(--accent2);text-decoration:underline}
+.crumbs .c-sep{color:#cbd5e1}
+.crumbs .c-cur{color:var(--text);font-weight:700}
+.modal-head h2{margin:0 0 4px;font-size:20px;letter-spacing:-.4px;font-weight:800;display:flex;align-items:center;gap:10px}
+.modal-head .modal-sub{color:var(--muted);font-size:13px}
+.tabs{display:flex;gap:6px;margin-top:14px;border-bottom:1px solid var(--line);padding-bottom:0}
+.tab{
+  border:0;background:transparent;color:var(--muted);font-family:inherit;font-weight:700;font-size:13px;
+  padding:10px 14px;cursor:pointer;transition:.18s;border-bottom:2px solid transparent;
+  display:flex;align-items:center;gap:7px;margin-bottom:-1px;
+}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab .t-badge{font-size:10.5px;font-weight:800;padding:2px 7px;border-radius:999px;background:#eef2ff;color:var(--accent)}
+.tab.active .t-badge{background:var(--accent);color:#fff}
 
-.file-item{display:flex;align-items:center;gap:14px;padding:14px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;cursor:pointer;transition:.15s;background:#fff}
-.file-item:hover{border-color:var(--accent);background:#f8faff;transform:translateX(2px)}
-.file-item .fi-icon{width:42px;height:42px;border-radius:10px;background:#eef2ff;display:grid;place-items:center;font-size:20px;flex-shrink:0}
+.modal-search{padding:14px 24px;flex-shrink:0;border-bottom:1px solid var(--line)}
+.modal-search input{
+  width:100%;border:1px solid var(--line);padding:11px 14px;border-radius:10px;
+  font-size:13.5px;font-family:inherit;outline:none;background:#f8fafc;transition:.2s;
+}
+.modal-search input:focus{border-color:var(--accent);background:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.09)}
+
+.modal-body{
+  flex:1 1 auto;overflow-y:auto;padding:18px 24px 22px;
+  -webkit-overflow-scrolling:touch;min-height:0;
+}
+.modal-body::-webkit-scrollbar{width:10px}
+.modal-body::-webkit-scrollbar-track{background:#f1f5f9;border-radius:8px}
+.modal-body::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:8px}
+.modal-body::-webkit-scrollbar-thumb:hover{background:#94a3b8}
+.modal-actions{padding:14px 24px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:10px;flex-shrink:0}
+
+/* ---------- FILE ITEM ---------- */
+.file-item{
+  display:flex;align-items:center;gap:14px;padding:14px;
+  border:1px solid var(--line);border-radius:13px;margin-bottom:8px;
+  cursor:pointer;transition:.18s;background:#fff;
+}
+.file-item:last-child{margin-bottom:0}
+.file-item:hover{border-color:var(--accent);background:#f8fbff;transform:translateX(3px);box-shadow:0 6px 18px rgba(37,99,235,.08)}
+.file-item .fi-icon{width:44px;height:44px;border-radius:11px;background:#eef2ff;display:grid;place-items:center;font-size:20px;flex-shrink:0}
 .file-item .fi-main{flex:1;min-width:0}
-.file-item .fi-name{font-weight:700;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.file-item .fi-desc{color:var(--muted);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.file-item .fi-size{color:var(--muted);font-size:12px;white-space:nowrap;flex-shrink:0}
-.file-item .fi-dl{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;font-weight:700;font-size:13px;white-space:nowrap;flex-shrink:0}
-
-/* карточки видео */
-.videos{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-.video-card{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff;text-decoration:none;color:inherit;transition:.15s;cursor:pointer}
-.video-card:hover{border-color:var(--accent);background:#f8faff;transform:translateX(2px)}
-.video-card .v-icon{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#2563eb,#1d4ed8);display:grid;place-items:center;flex-shrink:0;color:#fff;font-size:20px;box-shadow:0 6px 16px rgba(37,99,235,.28)}
-.video-card .v-icon:after{content:"↗";font-weight:800;font-size:22px;line-height:1}
-.video-card .v-main{flex:1;min-width:0}
-.video-card .v-name{font-weight:700;font-size:13px;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.video-card .v-desc{color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.video-card .v-meta{display:flex;gap:6px;margin-top:5px;font-size:11px;color:#94a3b8}
-.video-card .v-dur{background:#eef2ff;color:#1d4ed8;padding:2px 7px;border-radius:5px;font-weight:700}
-.video-card .v-proj{background:#f1f5f9;color:#475569;padding:2px 7px;border-radius:5px;font-weight:700}
-
-.status{font-size:12px;color:#cbd5e1;margin-top:10px}
-.toast{position:fixed;right:22px;bottom:22px;background:#111827;color:white;padding:13px 16px;border-radius:11px;display:none;z-index:60;max-width:340px}
-.toast b{display:block;margin-bottom:4px}
-
-.errbox{max-width:1280px;margin:20px auto;padding:16px 20px;background:#fee2e2;border:1px solid #fecaca;color:#7f1d1d;border-radius:12px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap}
-
-@media(max-width:1000px){
-  .grid{grid-template-columns:repeat(2,1fr)}
+.file-item .fi-name{font-weight:700;font-size:13.5px;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-item .fi-desc{color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-item .fi-size{color:var(--muted2);font-size:11.5px;white-space:nowrap;flex-shrink:0}
+.file-item .fi-dl{
+  background:var(--accent);color:#fff;padding:8px 13px;border-radius:9px;
+  font-weight:700;font-size:12px;white-space:nowrap;flex-shrink:0;
+  display:flex;align-items:center;gap:5px;transition:.18s;
 }
-@media(max-width:800px){
-  .grid{grid-template-columns:1fr}
-  .top{align-items:flex-start;flex-direction:column}
-  .hero h2{font-size:27px}
+.file-item:hover .fi-dl{background:var(--accent2);transform:translateX(1px)}
+
+/* videos inside modal */
+.modal-body .videos{grid-template-columns:1fr;gap:10px}
+
+/* ---------- TOAST ---------- */
+.toast{
+  position:fixed;right:22px;bottom:22px;background:#0f172a;color:#fff;
+  padding:14px 18px;border-radius:13px;display:none;z-index:60;max-width:340px;
+  font-size:13px;box-shadow:0 20px 50px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.1);
+}
+.toast b{display:block;margin-bottom:4px;font-weight:800;font-size:13.5px}
+.toast.show{display:block;animation:toastIn .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.errbox{max-width:1320px;margin:20px auto;padding:16px 20px;background:#fee2e2;border:1px solid #fecaca;color:#7f1d1d;border-radius:12px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;white-space:pre-wrap}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:1000px){
+  .projects{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+}
+@media(max-width:700px){
+  header{padding:20px 5vw 24px}
+  .hero h2{font-size:22px}
+  .hero p{font-size:13px}
+  .stats{display:none}
+  .projects,.videos{grid-template-columns:1fr}
+  .proj-counts{display:none}
+  .search{position:relative;top:auto;flex-direction:column}
+  .search .btn{width:100%}
   .file-item .fi-size{display:none}
-  .videos{grid-template-columns:1fr}
+  .file-item .fi-dl{padding:8px 10px;font-size:11px}
+  .modal-box{border-radius:16px}
+  .modal-head,.modal-search,.modal-body,.modal-actions{padding-left:16px;padding-right:16px}
 }
 </style>
 </head>
 <body>
+
 <header>
   <div class="top">
     <div class="brand">
-      <div class="logo">П</div>
+      <div class="logo">Б</div>
       <div>
-        <h1 id="companyName">Проектный отдел</h1>
+        <h1 id="companyName">База знаний</h1>
         <div class="sub" id="subtitle">Материалы по проектам — для подрядчиков</div>
       </div>
     </div>
+    <div class="stats">
+      <div class="stat"><b id="statProjects">0</b><span>Проектов</span></div>
+      <div class="stat"><b id="statFiles">0</b><span>Файлов</span></div>
+      <div class="stat"><b id="statVideos">0</b><span>Видео</span></div>
+    </div>
   </div>
   <div class="hero">
-    <h2>Материалы по проектам</h2>
-    <p>Кликните проект — откроется список файлов и видеоинструкций. Клик по файлу — скачивание, клик по видео — просмотр на Яндекс.Диске.</p>
-    <div class="status" id="status"></div>
+    <h2>Все материалы по вашим проектам</h2>
+    <p>Выберите проект и откройте нужный раздел — файлы для скачивания или видеоинструкции на Яндекс.Диске.</p>
   </div>
 </header>
+
 <main>
   <div id="errbox"></div>
 
   <div class="search">
-    <input id="search" placeholder="Поиск по названию файла, видео или проекту…">
+    <div class="input-wrap">
+      <input id="search" placeholder="Поиск по названию файла, видео или проекту…">
+    </div>
     <button class="btn primary" id="btnClear">Очистить</button>
   </div>
 
   <section class="section" id="searchSection" style="display:none">
     <div class="section-title">
-      <h2>Результаты поиска</h2>
-      <span class="muted" id="searchCount"></span>
+      <h2>🔎 Результаты поиска <span class="badge" id="searchCount">0</span></h2>
+      <span class="hint">Клик по файлу — скачать, по видео — открыть на Диске</span>
     </div>
-    <div class="file-list" id="searchFiles" style="max-height:none"></div>
-    <div class="videos" id="searchVideos" style="margin-top:12px"></div>
+    <div id="searchFiles" style="margin-bottom:16px"></div>
+    <div class="videos" id="searchVideos"></div>
   </section>
 
   <div id="normalView">
-    <div class="grid" id="categories"></div>
-
     <section class="section">
       <div class="section-title">
-        <h2>Видеоинструкции</h2>
-        <span class="muted">Открываются на Яндекс.Диске</span>
+        <h2>📁 Проекты</h2>
+        <span class="hint">Выберите проект, чтобы открыть материалы</span>
+      </div>
+      <div class="projects" id="categories"></div>
+    </section>
+
+    <section class="section" id="videosSection">
+      <div class="section-title">
+        <h2>🎬 Видеоинструкции <span class="badge" id="videoCountBadge">0</span></h2>
+        <span class="hint">Открываются на Яндекс.Диске в новой вкладке</span>
       </div>
       <div class="videos" id="allVideos"></div>
     </section>
   </div>
 </main>
 
+<!-- МОДАЛКА ПРОЕКТА -->
 <div class="modal" id="filesModal">
   <div class="modal-box">
-    <h2 id="fmTitle">Файлы</h2>
-    <div class="modal-sub" id="fmSub"></div>
-    <div class="tabs" id="fmTabs" style="display:none">
-      <button class="tab active" data-tab="files" type="button">📄 Файлы</button>
-      <button class="tab" data-tab="videos" type="button">🎬 Видео</button>
+    <div class="modal-head">
+      <div class="crumbs" id="fmCrumbs">
+        <span class="c-link" id="crumbAll">Все проекты</span>
+      </div>
+      <h2 id="fmTitle">Проект</h2>
+      <div class="modal-sub" id="fmSub"></div>
+      <div class="tabs" id="fmTabs" style="display:none">
+        <button class="tab active" data-tab="files" type="button">
+          <span>📄 Файлы</span><span class="t-badge" id="tabFilesCount">0</span>
+        </button>
+        <button class="tab" data-tab="videos" type="button">
+          <span>🎬 Видео</span><span class="t-badge" id="tabVideosCount">0</span>
+        </button>
+      </div>
     </div>
     <div class="modal-search">
-      <input id="fmSearch" placeholder="Быстрый поиск по названию…">
+      <input id="fmSearch" placeholder="Быстрый поиск внутри проекта…">
     </div>
-    <div class="file-list" id="fmList"></div>
+    <div class="modal-body" id="fmBody"></div>
     <div class="modal-actions">
       <button class="btn secondary" id="fmClose">Закрыть</button>
     </div>
@@ -208,10 +352,20 @@ const FILES = [
 
   /* -------- ДП_ПЧ_ДО -------- */
   {name:"Акт приема-передачи давальческого оборудования ДП_ПЧ_ДО.docx", project:"dp_pch_do", url:"https://disk.360.yandex.ru/i/rL3snTad5UrzjA?download=1", updated:"17.09.2026"},
-  {name:"Инструкция для новичков по проекту ДП_ПЧ_ДО.docx",     project:"dp_pch_do", url:"https://disk.360.yandex.ru/i/Sbil02_kDsD_6A?download=1", updated:"16.09.2026"},
-  {name:"Cubic для МП х32",                                     project:"dp_pch_do", url:"https://disk.360.yandex.ru/d/s-5bdx0gknqahA?download=1", size:"31 МБ", updated:"15.09.2026"},
-  {name:"Cubic для МП х64",                                     project:"dp_pch_do", url:"https://disk.360.yandex.ru/d/vcTSw1BPkrhUEg?download=1", size:"31 МБ", updated:"15.09.2026"},
+  {name:"Cubic для МП х32",                                             project:"dp_pch_do", url:"https://disk.360.yandex.ru/d/s-5bdx0gknqahA?download=1", size:"31 МБ", updated:"15.09.2026"},
+  {name:"Cubic для МП х64",                                             project:"dp_pch_do", url:"https://disk.360.yandex.ru/d/vcTSw1BPkrhUEg?download=1", size:"31 МБ", updated:"15.09.2026"},
+  {name:"Cubic Cubic 7.7.0 для ДП_ПЧ_ТВ LMC",                           project:"dp_pch_do",    url:"https://disk.360.yandex.ru/d/H4zLLrOEAP1-qA?download=1", size:"32 МБ", updated:"15.09.2026"},
+  {name:"Cubic 7.7.0 для ДП_ПЧ_ТВ",                                     project:"dp_pch_do",    url:"https://disk.360.yandex.ru/d/3qiFnXPSjJQmLQ?download=1", size:"32 МБ", updated:"15.09.2026"},
   {name:"Акт технического заключения о неисправности оборудования.pdf", project:"dp_pch_do", url:"https://disk.360.yandex.ru/i/MQWzAjHBcqIgvw?download=1", updated:"17.09.2026"},
+  {name:"ТЗ по проекту ДП_ПЧ в ТКШ V13.pdf",                            project:"dp_pch_do",    url:"https://disk.360.yandex.ru/i/G7TH_CLtwZHs_w?download=1", updated:"15.09.2026"},
+  {name:"ТЗ по проекту ДП_ПЧ в ЩМ V4.pdf",                              project:"dp_pch_do",    url:"https://disk.360.yandex.ru/i/BTcmRsMd6hPGqw?download=1", updated:"15.09.2026"},
+  {name:"Пример ФО для проектов ДП_ПЧ/ДП_ПЧ_ДО.pdf",                    project:"dp_pch_do",    url:"https://disk.360.yandex.ru/i/ALz1ysyTxkiPKw?download=1", updated:"15.09.2026"},
+  {name:"Акт о повторном выезде ДП_ПЧ.docx",                            project:"dp_pch_do",    url:"https://disk.360.yandex.ru/i/J2BRAYLt8rV_Pg?download=1", updated:"17.09.2026"},
+  {name:"Акт об отсутствии оборудования ДП_ПЧ.docx",                    project:"dp_pch_do",    url:"https://disk.360.yandex.ru/i/U-AW76cD1HAEkQ?download=1", updated:"17.09.2026"},
+  {name:"Акт приема и ведомость смонтированного оборудования ДП_ПЧ.docx", project:"dp_pch_do", url:"https://disk.360.yandex.ru/i/lD5grNaw57R3dQ?download=1", updated:"17.09.2026"},
+  {name:"Акт типовые проблемы ТТ ДП_ПЧ.docx",                           project:"dp_pch_do",    url:"https://disk.360.yandex.ru/i/fhniV4_g9uyOAg?download=1", updated:"17.09.2026"},
+  {name:"Акт технического заключения о неисправности оборудования.pdf", project:"dp_pch_do", url:"https://disk.360.yandex.ru/i/MQWzAjHBcqIgvw?download=1", updated:"17.09.2026"},
+
 
   /* -------- ЛЕНТА -------- */
   {name:"ТЗ по проекту Лента СМ 43.pdf",                        project:"lenta",     url:"https://disk.360.yandex.ru/i/ekQb9yEdSscQJg?download=1", updated:"15.09.2026"},
@@ -246,20 +400,16 @@ const FILES = [
   {name:"Акт Фасоль.docx",                                      project:"fasol",     url:"https://disk.360.yandex.ru/i/XBgnewWcIypQ8A?download=1", updated:"17.09.2026"}
 ];
 
-/* ============================================================
-   ПРОЕКТЫ = КАТЕГОРИИ
-   ============================================================ */
-
 const CATEGORIES = [
-  {id:"emm",       title:"ЕММ",              icon:"📦"},
-  {id:"dp_pch",    title:"ДП_ПЧ",            icon:"📦"},
-  {id:"dp_pch_do", title:"ДП_ПЧ_ДО",         icon:"📦"},
-  {id:"lenta",     title:"Лента",            icon:"🏬"},
-  {id:"metro",     title:"Метро",            icon:"🚇"},
-  {id:"magnit",    title:"Магнит Аптеки",    icon:"💊"},
-  {id:"fasad",     title:"Фасадные экраны",  icon:"🏢"},
-  {id:"shelf",     title:"Шелфбаннеры",      icon:"🪧"},
-  {id:"fasol",     title:"Фасоль",           icon:"🌰"}
+  {id:"emm",       title:"ЕММ",              icon:"📦", color:"#2563eb"},
+  {id:"dp_pch",    title:"ДП_ПЧ",            icon:"📡", color:"#0891b2"},
+  {id:"dp_pch_do", title:"ДП_ПЧ_ДО",         icon:"📡", color:"#0d9488"},
+  {id:"lenta",     title:"Лента",            icon:"🏬", color:"#ea580c"},
+  {id:"metro",     title:"Метро",            icon:"🚇", color:"#16a34a"},
+  {id:"magnit",    title:"Магнит Аптеки",    icon:"💊", color:"#dc2626"},
+  {id:"fasad",     title:"Фасадные экраны",  icon:"🏢", color:"#7c3aed"},
+  {id:"shelf",     title:"Шелфбаннеры",      icon:"🪧", color:"#d97706"},
+  {id:"fasol",     title:"Фасоль",           icon:"🌰", color:"#92400e"}
 ];
 
 /* ============================================================
@@ -268,168 +418,36 @@ const CATEGORIES = [
 
 const VIDEOS = [
   /* -------- ШЕЛФБАННЕРЫ -------- */
-  {
-    name: "Синхронизация ориентации матриц ШБ.mp4",
-    project: "shelf",
-    description: "Видео по синхронизации ориентации матриц на Шелфбаннерах",
-    url: "https://disk.360.yandex.ru/i/R0xjrLVxu9CHuw",
-    duration: "01:25"
-  },
-  {
-    name: "Крепление петли к ШБ и уголку.mp4",
-    project: "shelf",
-    description: "Крепеж петли к Шелфбаннеру и уголку",
-    url: "https://disk.360.yandex.ru/i/zkB9BkW6MgqcQQ",
-    duration: "00:08"
-  },
-  {
-    name: "Крепление петли к ШБ.mp4",
-    project: "shelf",
-    description: "Крепеж петли к Шелфбаннеру",
-    url: "https://disk.360.yandex.ru/i/Jc2aagtfhLfsuA",
-    duration: "00:10"
-  },
-  {
-    name: "Монтаж петель на ШБ.mp4",
-    project: "shelf",
-    description: "Монтаж петель на Шелфбаннер",
-    url: "https://disk.360.yandex.ru/i/pBnpqni01xoPnw",
-    duration: "00:25"
-  },
-  {
-    name: "Настройка петель 1.mp4",
-    project: "shelf",
-    description: "Настройка петель 1",
-    url: "https://disk.360.yandex.ru/i/rijUPrYODINDJQ",
-    duration: "01:33"
-  },
-  {
-    name: "Настройка петли 2.mp4",
-    project: "shelf",
-    description: "Настройка петель 2",
-    url: "https://disk.360.yandex.ru/i/cjeaEOsnAH18kg",
-    duration: "01:49"
-  },
-  {
-    name: "Установка ЕММ на ШБ.mp4",
-    project: "shelf",
-    description: "Установка ЕММ на Шелфбаннер",
-    url: "https://disk.360.yandex.ru/i/qPI12dVo4DowwQ",
-    duration: "02:50"
-  },
-  {
-    name: "Подключение управляющего ПК к экрану.mp4",
-    project: "shelf",
-    description: "Подключение управляющего ПК к Шелфбаннеру",
-    url: "https://disk.360.yandex.ru/i/VtrpCPF7i5xw6A",
-    duration: "03:05"
-  },
-  {
-    name: "Пример подключения кабелей.mp4",
-    project: "shelf",
-    description: "Пример подключения кабелей",
-    url: "https://disk.360.yandex.ru/i/iPLDe726ZwFGvQ",
-    duration: "00:21"
-  },
-  {
-    name: "Подключение кабелей.mp4",
-    project: "shelf",
-    description: "Подключение кабелей",
-    url: "https://disk.360.yandex.ru/i/jeNTf9YRxqp5sA",
-    duration: "00:08"
-  },
+  {name:"Синхронизация ориентации матриц ШБ.mp4",           project:"shelf",     description:"Видео по синхронизации ориентации матриц на Шелфбаннерах", url:"https://disk.360.yandex.ru/i/R0xjrLVxu9CHuw", duration:"01:25"},
+  {name:"Крепление петли к ШБ и уголку.mp4",                project:"shelf",     description:"Крепеж петли к Шелфбаннеру и уголку",                       url:"https://disk.360.yandex.ru/i/zkB9BkW6MgqcQQ", duration:"00:08"},
+  {name:"Крепление петли к ШБ.mp4",                          project:"shelf",     description:"Крепеж петли к Шелфбаннеру",                                 url:"https://disk.360.yandex.ru/i/Jc2aagtfhLfsuA", duration:"00:10"},
+  {name:"Монтаж петель на ШБ.mp4",                           project:"shelf",     description:"Монтаж петель на Шелфбаннер",                                url:"https://disk.360.yandex.ru/i/pBnpqni01xoPnw", duration:"00:25"},
+  {name:"Настройка петель 1.mp4",                            project:"shelf",     description:"Настройка петель 1",                                          url:"https://disk.360.yandex.ru/i/rijUPrYODINDJQ", duration:"01:33"},
+  {name:"Настройка петли 2.mp4",                             project:"shelf",     description:"Настройка петель 2",                                          url:"https://disk.360.yandex.ru/i/cjeaEOsnAH18kg", duration:"01:49"},
+  {name:"Установка ЕММ на ШБ.mp4",                           project:"shelf",     description:"Установка ЕММ на Шелфбаннер",                                url:"https://disk.360.yandex.ru/i/qPI12dVo4DowwQ", duration:"02:50"},
+  {name:"Подключение управляющего ПК к экрану.mp4",          project:"shelf",     description:"Подключение управляющего ПК к Шелфбаннеру",                  url:"https://disk.360.yandex.ru/i/VtrpCPF7i5xw6A", duration:"03:05"},
+  {name:"Пример подключения кабелей.mp4",                    project:"shelf",     description:"Пример подключения кабелей",                                  url:"https://disk.360.yandex.ru/i/iPLDe726ZwFGvQ", duration:"00:21"},
+  {name:"Подключение кабелей.mp4",                           project:"shelf",     description:"Подключение кабелей",                                         url:"https://disk.360.yandex.ru/i/jeNTf9YRxqp5sA", duration:"00:08"},
 
   /* -------- ФАСАДНЫЕ ЭКРАНЫ -------- */
-  {
-    name: "Установка ПО и активация ЕММ.mp4",
-    project: "fasad",
-    description: "Установка ПО и активация ЕММ на ФЭ",
-    url: "https://disk.360.yandex.ru/i/pEFOUsgD_nR4Pg",
-    duration: "02:15"
-  },
-  {
-    name: "Настройка таймера.MOV",
-    project: "fasad",
-    description: "Настройка таймера на ФЭ",
-    url: "https://disk.360.yandex.ru/i/enXW4i3RTYQ4AQ",
-    duration: "01:19"
-  },
+  {name:"Установка ПО и активация ЕММ.mp4",                  project:"fasad",     description:"Установка ПО и активация ЕММ на ФЭ",                          url:"https://disk.360.yandex.ru/i/pEFOUsgD_nR4Pg", duration:"02:15"},
+  {name:"Настройка таймера.MOV",                             project:"fasad",     description:"Настройка таймера на ФЭ",                                     url:"https://disk.360.yandex.ru/i/enXW4i3RTYQ4AQ", duration:"01:19"},
 
   /* -------- ДП_ПЧ -------- */
-  {
-    name: "Видео настройки CMA-120.mp4",
-    project: "dp_pch",
-    description: "Видео настройки усилителя CMA-120",
-    url: "https://disk.360.yandex.ru/i/mE0SOYZY0hLwaA",
-    duration: "02:56"
-  },
+  {name:"Видео настройки CMA-120.mp4",                       project:"dp_pch",    description:"Видео настройки усилителя CMA-120",                            url:"https://disk.360.yandex.ru/i/mE0SOYZY0hLwaA", duration:"02:56"},
 
   /* -------- ДП_ПЧ_ДО -------- */
-  {
-    name: "Видео настройки CMA-120.mp4",
-    project: "dp_pch_do",
-    description: "Видео настройки усилителя CMA-120",
-    url: "https://disk.360.yandex.ru/i/mE0SOYZY0hLwaA",
-    duration: "02:56"
-  },
+  {name:"Видео настройки CMA-120.mp4",                       project:"dp_pch_do", description:"Видео настройки усилителя CMA-120",                            url:"https://disk.360.yandex.ru/i/mE0SOYZY0hLwaA", duration:"02:56"},
 
   /* -------- ЕММ -------- */
-  {
-    name: "Установка ЕММ на ДП 1 вариант ревизии.mp4",
-    project: "emm",
-    description: "Установка ЕММ на ДП 1 вариант ревизии",
-    url: "https://disk.360.yandex.ru/i/Rm6cGLPPQj0AKg",
-    duration: "01:34"
-  },
-  {
-    name: "Установка ЕММ на ДП 2 вариант ревизии.mp4",
-    project: "emm",
-    description: "Установка ЕММ на ДП 2 вариант ревизии",
-    url: "https://disk.360.yandex.ru/i/eGl-bA5JuuYKnA",
-    duration: "01:54"
-  },
-  {
-    name: "Установка ЕММ на ПЧ.mp4",
-    project: "emm",
-    description: "Установка ЕММ на прайс-чекер",
-    url: "https://disk.360.yandex.ru/i/C9Bjbh88NbhSHg",
-    duration: "05:25"
-  },
-  {
-    name: "Установка ЕММ на ДП по WiFi.mp4",
-    project: "emm",
-    description: "Установка ЕММ на ДП по WiFi",
-    url: "https://disk.360.yandex.ru/i/6H4Y0NmlG3Fb5Q",
-    duration: "05:10"
-  },
-  {
-    name: "Установка ЕММ на ФЭ.mp4",
-    project: "emm",
-    description: "Установка ЕММ на Фасадный экран",
-    url: "https://disk.360.yandex.ru/i/Y-CAMHuHURM6uQ",
-    duration: "02:45"
-  },
-  {
-    name: "Установка ЕММ на ТВ.mp4",
-    project: "emm",
-    description: "Установка ЕММ на ТВ-панель",
-    url: "https://disk.360.yandex.ru/i/Y66_R_43qIViXw",
-    duration: "02:20"
-  },
-  {
-    name: "Устанвока Cubic Vision на ТВ.mp4",
-    project: "emm",
-    description: "Устанвока Cubic Vision на ТВ-панель",
-    url: "https://disk.360.yandex.ru/i/TWeL6VozifJwHg",
-    duration: "01:39"
-  },
-  {
-    name: "Устанвока Cubic Vision на ТВ ADTS.mp4",
-    project: "emm",
-    description: "Устанвока Cubic Vision на ТВ-панель марки ADTS",
-    url: "https://disk.360.yandex.ru/i/g1cUZx1w8ZzchA",
-    duration: "01:36"
-  }
+  {name:"Установка ЕММ на ДП 1 вариант ревизии.mp4",         project:"emm",       description:"Установка ЕММ на ДП 1 вариант ревизии",                        url:"https://disk.360.yandex.ru/i/Rm6cGLPPQj0AKg", duration:"01:34"},
+  {name:"Установка ЕММ на ДП 2 вариант ревизии.mp4",         project:"emm",       description:"Установка ЕММ на ДП 2 вариант ревизии",                        url:"https://disk.360.yandex.ru/i/eGl-bA5JuuYKnA", duration:"01:54"},
+  {name:"Установка ЕММ на ПЧ.mp4",                           project:"emm",       description:"Установка ЕММ на прайс-чекер",                                 url:"https://disk.360.yandex.ru/i/C9Bjbh88NbhSHg", duration:"05:25"},
+  {name:"Установка ЕММ на ДП по WiFi.mp4",                   project:"emm",       description:"Установка ЕММ на ДП по WiFi",                                  url:"https://disk.360.yandex.ru/i/6H4Y0NmlG3Fb5Q", duration:"05:10"},
+  {name:"Установка ЕММ на ФЭ.mp4",                           project:"emm",       description:"Установка ЕММ на Фасадный экран",                              url:"https://disk.360.yandex.ru/i/Y-CAMHuHURM6uQ", duration:"02:45"},
+  {name:"Установка ЕММ на ТВ.mp4",                           project:"emm",       description:"Установка ЕММ на ТВ-панель",                                   url:"https://disk.360.yandex.ru/i/Y66_R_43qIViXw", duration:"02:20"},
+  {name:"Устанвока Cubic Vision на ТВ.mp4",                  project:"emm",       description:"Устанвока Cubic Vision на ТВ-панель",                          url:"https://disk.360.yandex.ru/i/TWeL6VozifJwHg", duration:"01:39"},
+  {name:"Устанвока Cubic Vision на ТВ ADTS.mp4",             project:"emm",       description:"Устанвока Cubic Vision на ТВ-панель марки ADTS",                url:"https://disk.360.yandex.ru/i/g1cUZx1w8ZzchA", duration:"01:36"}
 ];
 
 /* ============================================================
@@ -441,16 +459,13 @@ function esc(s){
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[m]));
 }
-
 function plural(n, forms){
-  const a = Math.abs(n) % 100;
-  const b = a % 10;
+  const a = Math.abs(n) % 100, b = a % 10;
   if (a > 10 && a < 20) return forms[2];
   if (b > 1 && b < 5)   return forms[1];
   if (b === 1)          return forms[0];
   return forms[2];
 }
-
 function fileIcon(name){
   const n = String(name || "").toLowerCase();
   if (n.endsWith(".pdf")) return "📕";
@@ -464,25 +479,10 @@ function fileIcon(name){
   if (n.endsWith(".png") || n.endsWith(".jpg") || n.endsWith(".jpeg")) return "🖼️";
   return "📄";
 }
-
 const $ = id => document.getElementById(id);
-const els = {
-  categories: $("categories"),
-  status:     $("status"),
-  search:     $("search"),
-  fmTitle:    $("fmTitle"),
-  fmSub:      $("fmSub"),
-  fmSearch:   $("fmSearch"),
-  fmList:     $("fmList"),
-  fmTabs:     $("fmTabs"),
-  filesModal: $("filesModal"),
-  toast:      $("toast"),
-  errbox:     $("errbox")
-};
-
 function catById(id){ return CATEGORIES.find(c => c.id === id); }
 
-/* ---------- карточка файла ---------- */
+/* ---------- DOM-элементы ---------- */
 function buildFileItem(f){
   const item = document.createElement("div");
   item.className = "file-item";
@@ -492,15 +492,15 @@ function buildFileItem(f){
     '<div class="fi-icon">' + esc(fileIcon(f.name)) + '</div>' +
     '<div class="fi-main">' +
       '<div class="fi-name">' + esc(f.name) + '</div>' +
-      '<div class="fi-desc">' + esc(f.description || "") + '</div>' +
+      (f.description ? '<div class="fi-desc">' + esc(f.description) + '</div>' : '') +
     '</div>' +
     '<div class="fi-size">' + esc(f.size || "") +
-      (f.updated ? " • " + esc(f.updated) : "") + '</div>' +
+      (f.size && f.updated ? " · " : "") +
+      (f.updated ? esc(f.updated) : "") + '</div>' +
     '<div class="fi-dl">⬇ Скачать</div>';
   return item;
 }
 
-/* ---------- карточка видео ---------- */
 function buildVideoCard(v){
   const a = document.createElement("a");
   a.className = "video-card";
@@ -508,46 +508,72 @@ function buildVideoCard(v){
   a.target = "_blank";
   a.rel = "noopener";
   const cat = catById(v.project);
-  const meta = [];
-  if (v.duration) meta.push('<span class="v-dur">' + esc(v.duration) + '</span>');
-  if (cat) meta.push('<span class="v-proj">' + esc(cat.icon + " " + cat.title) + '</span>');
   a.innerHTML =
     '<div class="v-icon"></div>' +
     '<div class="v-main">' +
       '<div class="v-name">' + esc(v.name) + '</div>' +
       (v.description ? '<div class="v-desc">' + esc(v.description) + '</div>' : '') +
-      (meta.length ? '<div class="v-meta">' + meta.join("") + '</div>' : '') +
+      '<div class="v-meta">' +
+        (v.duration ? '<span class="v-chip v-dur">⏱ ' + esc(v.duration) + '</span>' : '') +
+        (cat ? '<span class="v-chip v-proj">' + esc(cat.icon + " " + cat.title) + '</span>' : '') +
+      '</div>' +
     '</div>';
   return a;
 }
 
+function buildProjectCard(c){
+  const fc = FILES.filter(f => f.project === c.id).length;
+  const vc = VIDEOS.filter(v => v.project === c.id).length;
+  const card = document.createElement("div");
+  card.className = "proj-card";
+  card.style.setProperty("--proj-color", c.color || "#2563eb");
+  card.setAttribute("data-cat", c.id);
+  card.innerHTML =
+    '<div class="proj-head">' +
+      '<div class="proj-icon">' + esc(c.icon) + '</div>' +
+      '<div class="proj-info">' +
+        '<h3>' + esc(c.title) + '</h3>' +
+        '<div class="proj-desc">' +
+          (fc && vc ? 'Файлы и видеоинструкции' : fc ? 'Только файлы' : vc ? 'Только видео' : 'Материалов пока нет') +
+        '</div>' +
+      '</div>' +
+      '<div class="proj-counts">' +
+        '<div class="proj-count"><b>' + fc + '</b><span>файлы</span></div>' +
+        '<div class="proj-count"><b>' + vc + '</b><span>видео</span></div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="proj-actions">' +
+      '<button class="proj-btn" data-open="files" data-proj="' + esc(c.id) + '"' + (fc ? '' : ' disabled') + '>' +
+        '<span class="b-ic">📄</span><span>' + (fc ? 'Файлы (' + fc + ')' : 'Нет файлов') + '</span>' +
+      '</button>' +
+      '<button class="proj-btn" data-open="videos" data-proj="' + esc(c.id) + '"' + (vc ? '' : ' disabled') + '>' +
+        '<span class="b-ic">🎬</span><span>' + (vc ? 'Видео (' + vc + ')' : 'Нет видео') + '</span>' +
+      '</button>' +
+    '</div>';
+  return card;
+}
+
 /* ---------- рендер главной ---------- */
-function renderCategories(){
-  els.categories.innerHTML = "";
+function renderStats(){
+  $("statProjects").textContent = CATEGORIES.length;
+  $("statFiles").textContent = FILES.length;
+  $("statVideos").textContent = VIDEOS.length;
+  $("videoCountBadge").textContent = VIDEOS.length;
+}
+
+function renderProjects(){
+  const grid = $("categories");
+  grid.innerHTML = "";
   const frag = document.createDocumentFragment();
-  CATEGORIES.forEach(c => {
-    const fc = FILES.filter(f => f.project === c.id).length;
-    const vc = VIDEOS.filter(v => v.project === c.id).length;
-    const parts = [];
-    if (fc) parts.push(fc + " " + plural(fc, ["файл","файла","файлов"]));
-    if (vc) parts.push(vc + " " + plural(vc, ["видео","видео","видео"]));
-    const card = document.createElement("div");
-    card.className = "card";
-    card.setAttribute("data-cat", c.id);
-    card.innerHTML =
-      '<div class="icon">' + esc(c.icon) + '</div>' +
-      '<h3>' + esc(c.title) + '</h3>' +
-      '<div class="muted">' + (parts.length ? esc(parts.join(" · ")) : "Материалов нет") + '</div>';
-    frag.appendChild(card);
-  });
-  els.categories.appendChild(frag);
+  CATEGORIES.forEach(c => frag.appendChild(buildProjectCard(c)));
+  grid.appendChild(frag);
 }
 
 function renderAllVideos(){
   const box = $("allVideos");
   box.innerHTML = "";
   if (!VIDEOS.length){
-    box.innerHTML = '<div class="empty">Видео пока нет</div>';
+    box.innerHTML = '<div class="empty"><span class="em-ic">🎬</span>Видео пока нет</div>';
     return;
   }
   const frag = document.createDocumentFragment();
@@ -555,63 +581,40 @@ function renderAllVideos(){
   box.appendChild(frag);
 }
 
-function renderStatus(){
-  els.status.textContent = "Проектов: " + CATEGORIES.length + " • файлов: " + FILES.length + " • видео: " + VIDEOS.length;
-}
-
 function render(){
-  renderCategories();
+  renderStats();
+  renderProjects();
   renderAllVideos();
-  renderStatus();
 }
 
 /* ---------- поиск ---------- */
 function renderSearchResults(){
-  const q = els.search.value.toLowerCase().trim();
-  const searchSection = document.getElementById("searchSection");
-  const normalView    = document.getElementById("normalView");
-  const searchFiles   = document.getElementById("searchFiles");
-  const searchVideos  = document.getElementById("searchVideos");
-  const searchCount   = document.getElementById("searchCount");
+  const q = $("search").value.toLowerCase().trim();
+  const searchSection = $("searchSection");
+  const normalView    = $("normalView");
+  const searchFiles   = $("searchFiles");
+  const searchVideos  = $("searchVideos");
+  const searchCount   = $("searchCount");
 
   if (!q){
     searchSection.style.display = "none";
     normalView.style.display = "";
     return;
   }
-
   searchSection.style.display = "";
   normalView.style.display = "none";
 
   const files = FILES.filter(f => {
     const cat = catById(f.project);
-    const projectTitle = cat ? cat.title : "";
-    const text = (
-      (f.name || "") + " " +
-      (f.description || "") + " " +
-      (f.size || "") + " " +
-      (f.updated || "") + " " +
-      projectTitle
-    ).toLowerCase();
-    return text.includes(q);
+    return ((f.name || "") + " " + (f.description || "") + " " + (f.size || "") + " " + (f.updated || "") + " " + (cat ? cat.title : "")).toLowerCase().includes(q);
   });
-
   const videos = VIDEOS.filter(v => {
     const cat = catById(v.project);
-    const projectTitle = cat ? cat.title : "";
-    const text = (
-      (v.name || "") + " " +
-      (v.description || "") + " " +
-      (v.duration || "") + " " +
-      projectTitle
-    ).toLowerCase();
-    return text.includes(q);
+    return ((v.name || "") + " " + (v.description || "") + " " + (v.duration || "") + " " + (cat ? cat.title : "")).toLowerCase().includes(q);
   });
 
   const total = files.length + videos.length;
-  searchCount.textContent = total
-    ? "Найдено: " + total + " (" + files.length + " файлов, " + videos.length + " видео)"
-    : "Ничего не найдено";
+  searchCount.textContent = total || "0";
 
   searchFiles.innerHTML = "";
   searchVideos.innerHTML = "";
@@ -621,168 +624,180 @@ function renderSearchResults(){
     files.forEach(f => frag.appendChild(buildFileItem(f)));
     searchFiles.appendChild(frag);
   }
-
   if (videos.length){
     const frag = document.createDocumentFragment();
     videos.forEach(v => frag.appendChild(buildVideoCard(v)));
     searchVideos.appendChild(frag);
   }
-
-  if (!files.length && !videos.length){
-    searchFiles.innerHTML = '<div class="empty">По запросу «' + esc(q) + '» ничего не найдено</div>';
+  if (!total){
+    searchFiles.innerHTML = '<div class="empty"><span class="em-ic">🔎</span>По запросу «' + esc(q) + '» ничего не найдено</div>';
   }
 }
 
 /* ---------- модалка проекта ---------- */
-let currentCategory = null;
+let currentProject = null;
 let currentTab = "files";
 
-function openFilesModal(categoryId){
-  currentCategory = categoryId;
-  currentTab = "files";
-  const cat = catById(categoryId);
-  els.fmTitle.textContent = (cat ? cat.icon + " " + cat.title : "Файлы");
+function openProject(projectId, tab){
+  const cat = catById(projectId);
+  if (!cat) return;
+  currentProject = projectId;
+  currentTab = tab || "files";
 
-  const fc = FILES.filter(f => f.project === categoryId).length;
-  const vc = VIDEOS.filter(v => v.project === categoryId).length;
-  const parts = [];
-  if (fc) parts.push(fc + " " + plural(fc, ["файл","файла","файлов"]));
-  if (vc) parts.push(vc + " " + plural(vc, ["видео","видео","видео"]));
-  els.fmSub.textContent = parts.join(" · ");
+  const fc = FILES.filter(f => f.project === projectId).length;
+  const vc = VIDEOS.filter(v => v.project === projectId).length;
 
-  /* Показываем вкладки, только если у проекта есть и файлы, и видео */
+  $("fmTitle").textContent = cat.icon + " " + cat.title;
+  $("fmSub").textContent = "Файлы: " + fc + " · Видео: " + vc;
+  $("tabFilesCount").textContent = fc;
+  $("tabVideosCount").textContent = vc;
+
+  /* хлебные крошки */
+  const crumbs = $("fmCrumbs");
+  crumbs.innerHTML = '<span class="c-link" id="crumbAll">Все проекты</span>' +
+    '<span class="c-sep">/</span>' +
+    '<span class="c-cur">' + esc(cat.icon + " " + cat.title) + '</span>';
+  $("crumbAll").addEventListener("click", closeModal);
+
+  /* табы */
+  const tabs = $("fmTabs");
   if (fc && vc){
-    els.fmTabs.style.display = "";
-    els.fmTabs.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-    els.fmTabs.querySelector('.tab[data-tab="files"]').classList.add("active");
+    tabs.style.display = "";
+    tabs.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.getAttribute("data-tab") === currentTab));
   } else {
-    els.fmTabs.style.display = "none";
-    /* Если только видео — сразу открываем вкладку видео */
+    tabs.style.display = "none";
     if (!fc && vc) currentTab = "videos";
+    if (fc && !vc) currentTab = "files";
   }
 
-  els.fmSearch.value = "";
-  renderFilesModal();
-  els.filesModal.classList.add("show");
-  setTimeout(() => els.fmSearch.focus(), 30);
+  $("fmSearch").value = "";
+  renderModalBody();
+
+  $("filesModal").classList.add("show");
+  setTimeout(() => $("fmSearch").focus(), 50);
 }
 
-function closeFilesModal(){
-  els.filesModal.classList.remove("show");
-  currentCategory = null;
+function closeModal(){
+  $("filesModal").classList.remove("show");
+  currentProject = null;
 }
 
-function renderFilesModal(){
-  if (!currentCategory) return;
-  const q = els.fmSearch.value.toLowerCase().trim();
+function renderModalBody(){
+  if (!currentProject) return;
+  const q = $("fmSearch").value.toLowerCase().trim();
+  const body = $("fmBody");
 
   if (currentTab === "videos"){
     const list = VIDEOS.filter(v =>
-      v.project === currentCategory &&
+      v.project === currentProject &&
       (!q || (v.name + " " + (v.description || "")).toLowerCase().includes(q))
     );
-    els.fmList.innerHTML = "";
+    body.innerHTML = "";
     if (!list.length){
-      els.fmList.innerHTML = '<div class="empty">Видео не найдено</div>';
+      body.innerHTML = '<div class="empty"><span class="em-ic">🎬</span>Видео не найдено</div>';
       return;
     }
     const wrap = document.createElement("div");
     wrap.className = "videos";
     list.forEach(v => wrap.appendChild(buildVideoCard(v)));
-    els.fmList.appendChild(wrap);
+    body.appendChild(wrap);
     return;
   }
 
   const list = FILES.filter(f =>
-    f.project === currentCategory &&
+    f.project === currentProject &&
     (!q || (f.name + " " + (f.description || "")).toLowerCase().includes(q))
   );
-  els.fmList.innerHTML = "";
+  body.innerHTML = "";
   if (!list.length){
-    els.fmList.innerHTML = '<div class="empty">Файлов не найдено</div>';
+    body.innerHTML = '<div class="empty"><span class="em-ic">📄</span>Файлов не найдено</div>';
     return;
   }
   const frag = document.createDocumentFragment();
   list.forEach(f => frag.appendChild(buildFileItem(f)));
-  els.fmList.appendChild(frag);
+  body.appendChild(frag);
 }
-
-/* ---------- переключение вкладок ---------- */
-els.fmTabs.addEventListener("click", e => {
-  const tab = e.target.closest(".tab");
-  if (!tab) return;
-  currentTab = tab.getAttribute("data-tab");
-  els.fmTabs.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-  tab.classList.add("active");
-  els.fmSearch.value = "";
-  renderFilesModal();
-});
 
 /* ---------- скачивание ---------- */
 function downloadFile(url, name){
-  if (!url){
-    toast("Ссылка на файл не указана");
-    return;
-  }
+  if (!url){ toast("Ссылка на файл не указана"); return; }
   toast("Скачивание началось\n" + name);
   const a = document.createElement("a");
-  a.href = url;
-  a.rel = "noopener";
-  a.target = "_blank";
-  try {
-    if (url.startsWith(location.origin) || url.startsWith("file:")) {
-      a.download = name;
-    }
-  } catch(e){ /* ignore */ }
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  a.href = url; a.rel = "noopener"; a.target = "_blank";
+  try { if (url.startsWith(location.origin) || url.startsWith("file:")) a.download = name; } catch(e){}
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 
-/* ---------- делегирование ---------- */
+/* ---------- делегирование кликов ---------- */
 document.addEventListener("click", e => {
-  const card = e.target.closest(".card[data-cat]");
-  if (card) { openFilesModal(card.getAttribute("data-cat")); return; }
-
-  const item = e.target.closest(".file-item");
-  if (item){
-    downloadFile(item.getAttribute("data-url"), item.getAttribute("data-name"));
+  /* кнопки внутри карточки проекта */
+  const projBtn = e.target.closest(".proj-btn");
+  if (projBtn && !projBtn.disabled){
+    openProject(projBtn.getAttribute("data-proj"), projBtn.getAttribute("data-open"));
     return;
   }
 
-  if (e.target.id === "fmClose")  { closeFilesModal(); return; }
+  /* вся карточка проекта — открывает файлы (или видео, если файлов нет) */
+  const projCard = e.target.closest(".proj-card");
+  if (projCard && !projBtn){
+    const id = projCard.getAttribute("data-cat");
+    const fc = FILES.filter(f => f.project === id).length;
+    const vc = VIDEOS.filter(v => v.project === id).length;
+    if (fc) openProject(id, "files");
+    else if (vc) openProject(id, "videos");
+    return;
+  }
+
+  /* файл — скачивание */
+  const fileItem = e.target.closest(".file-item");
+  if (fileItem){
+    downloadFile(fileItem.getAttribute("data-url"), fileItem.getAttribute("data-name"));
+    return;
+  }
+
+  if (e.target.id === "fmClose")  { closeModal(); return; }
   if (e.target.id === "btnClear") { clearSearch(); return; }
 
-  if (e.target.classList && e.target.classList.contains("modal")) {
-    e.target.classList.remove("show");
-    if (e.target.id === "filesModal") currentCategory = null;
-  }
+  /* клик по фону модалки */
+  if (e.target.id === "filesModal"){ closeModal(); }
 });
 
+/* ---------- табы в модалке ---------- */
+$("fmTabs").addEventListener("click", e => {
+  const tab = e.target.closest(".tab");
+  if (!tab) return;
+  currentTab = tab.getAttribute("data-tab");
+  $("fmTabs").querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t === tab));
+  $("fmSearch").value = "";
+  renderModalBody();
+});
+
+/* ---------- клавиши ---------- */
 document.addEventListener("keydown", e => {
   if (e.key === "Escape"){
-    document.querySelectorAll(".modal.show").forEach(m => m.classList.remove("show"));
-    currentCategory = null;
+    if ($("filesModal").classList.contains("show")) closeModal();
   }
 });
 
-els.search.addEventListener("input", renderSearchResults);
-els.fmSearch.addEventListener("input", renderFilesModal);
+/* ---------- input ---------- */
+$("search").addEventListener("input", renderSearchResults);
+$("fmSearch").addEventListener("input", renderModalBody);
 
-/* ---------- служебные ---------- */
+/* ---------- утилиты интерфейса ---------- */
 function clearSearch(){
-  els.search.value = "";
+  $("search").value = "";
   renderSearchResults();
 }
 
 let toastTimer = null;
 function toast(s){
-  els.toast.innerHTML = String(s).split("\n").map((line, i) =>
+  const t = $("toast");
+  t.innerHTML = String(s).split("\n").map((line, i) =>
     i === 0 ? "<b>" + esc(line) + "</b>" : esc(line)
   ).join("<br>");
-  els.toast.style.display = "block";
+  t.classList.add("show");
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { els.toast.style.display = "none"; }, 2600);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
 }
 
 /* ---------- старт ---------- */
@@ -790,11 +805,12 @@ try {
   render();
 } catch (err){
   console.error(err);
-  if (els.errbox){
-    els.errbox.className = "errbox";
-    els.errbox.textContent =
+  const b = $("errbox");
+  if (b){
+    b.className = "errbox";
+    b.textContent =
       "Ошибка в данных сайта:\n" + (err && err.message ? err.message : String(err)) +
-      "\n\nПроверьте массивы FILES и VIDEOS — чаще всего это пропущенная запятая.";
+      "\n\nПроверьте массивы FILES и VIDEOS.";
   }
 }
 </script>
