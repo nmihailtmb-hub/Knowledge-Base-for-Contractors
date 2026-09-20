@@ -21,6 +21,9 @@ h1{font-size:25px;margin:0 0 3px}
 main{max-width:1280px;margin:0 auto;padding:28px 5vw 60px}
 .search{background:var(--card);padding:16px;border-radius:16px;box-shadow:var(--shadow);display:flex;gap:10px}
 .search input{flex:1;border:1px solid var(--line);padding:13px 14px;border-radius:10px;font-size:15px;outline:none}
+.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:700;cursor:pointer;font-family:inherit}
+.primary{background:var(--accent);color:#fff}
+.secondary{background:#eef2f7;color:#17202a}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:21px;box-shadow:0 6px 24px rgba(20,35,55,.04);transition:.18s;cursor:pointer}
 .card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
@@ -32,17 +35,22 @@ main{max-width:1280px;margin:0 auto;padding:28px 5vw 60px}
 .section-title h2{margin:0;font-size:21px}
 .empty{padding:30px;text-align:center;color:var(--muted);background:#fff;border:1px dashed #cfd6df;border-radius:14px}
 
+/* модалка */
 .modal{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
 .modal.show{display:flex}
 .modal-box{width:min(760px,100%);background:#fff;border-radius:18px;padding:24px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden}
 .modal-box h2{margin:0 0 4px}
 .modal-box .modal-sub{color:var(--muted);font-size:14px;margin-bottom:14px}
 .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:14px;flex-shrink:0}
-.primary{background:var(--accent);color:#fff}
-.secondary{background:#eef2f7;color:#17202a}
 
 .modal-search{display:flex;gap:8px;margin-bottom:14px;flex-shrink:0}
 .modal-search input{flex:1;border:1px solid var(--line);padding:10px 12px;border-radius:10px;font-size:14px;outline:none;margin:0}
+
+/* вкладки внутри модалки */
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-shrink:0;border-bottom:1px solid var(--line);padding-bottom:10px}
+.tab{border:0;background:transparent;color:var(--muted);font-family:inherit;font-weight:700;font-size:13px;padding:8px 14px;border-radius:9px;cursor:pointer;transition:.18s}
+.tab:hover{background:#f1f5f9;color:var(--text)}
+.tab.active{background:var(--accent);color:#fff}
 
 .file-list{
   flex:1 1 auto;
@@ -68,6 +76,19 @@ main{max-width:1280px;margin:0 auto;padding:28px 5vw 60px}
 .file-item .fi-size{color:var(--muted);font-size:12px;white-space:nowrap;flex-shrink:0}
 .file-item .fi-dl{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;font-weight:700;font-size:13px;white-space:nowrap;flex-shrink:0}
 
+/* карточки видео */
+.videos{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.video-card{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff;text-decoration:none;color:inherit;transition:.15s;cursor:pointer}
+.video-card:hover{border-color:var(--accent);background:#f8faff;transform:translateX(2px)}
+.video-card .v-icon{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#2563eb,#1d4ed8);display:grid;place-items:center;flex-shrink:0;color:#fff;font-size:20px;box-shadow:0 6px 16px rgba(37,99,235,.28)}
+.video-card .v-icon:after{content:"↗";font-weight:800;font-size:22px;line-height:1}
+.video-card .v-main{flex:1;min-width:0}
+.video-card .v-name{font-weight:700;font-size:13px;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.video-card .v-desc{color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.video-card .v-meta{display:flex;gap:6px;margin-top:5px;font-size:11px;color:#94a3b8}
+.video-card .v-dur{background:#eef2ff;color:#1d4ed8;padding:2px 7px;border-radius:5px;font-weight:700}
+.video-card .v-proj{background:#f1f5f9;color:#475569;padding:2px 7px;border-radius:5px;font-weight:700}
+
 .status{font-size:12px;color:#cbd5e1;margin-top:10px}
 .toast{position:fixed;right:22px;bottom:22px;background:#111827;color:white;padding:13px 16px;border-radius:11px;display:none;z-index:60;max-width:340px}
 .toast b{display:block;margin-bottom:4px}
@@ -82,6 +103,7 @@ main{max-width:1280px;margin:0 auto;padding:28px 5vw 60px}
   .top{align-items:flex-start;flex-direction:column}
   .hero h2{font-size:27px}
   .file-item .fi-size{display:none}
+  .videos{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -89,16 +111,16 @@ main{max-width:1280px;margin:0 auto;padding:28px 5vw 60px}
 <header>
   <div class="top">
     <div class="brand">
-      <div class="logo">Б</div>
+      <div class="logo">П</div>
       <div>
-        <h1 id="companyName">База знаний </h1>
+        <h1 id="companyName">Проектный отдел</h1>
         <div class="sub" id="subtitle">Материалы по проектам — для подрядчиков</div>
       </div>
     </div>
   </div>
   <div class="hero">
     <h2>Материалы по проектам</h2>
-    <p>Кликните проект — откроется список файлов. Клик по файлу — скачивание.</p>
+    <p>Кликните проект — откроется список файлов и видеоинструкций. Клик по файлу — скачивание, клик по видео — просмотр на Яндекс.Диске.</p>
     <div class="status" id="status"></div>
   </div>
 </header>
@@ -106,7 +128,7 @@ main{max-width:1280px;margin:0 auto;padding:28px 5vw 60px}
   <div id="errbox"></div>
 
   <div class="search">
-    <input id="search" placeholder="Поиск по названию файла или проекту…">
+    <input id="search" placeholder="Поиск по названию файла, видео или проекту…">
     <button class="btn primary" id="btnClear">Очистить</button>
   </div>
 
@@ -116,10 +138,19 @@ main{max-width:1280px;margin:0 auto;padding:28px 5vw 60px}
       <span class="muted" id="searchCount"></span>
     </div>
     <div class="file-list" id="searchFiles" style="max-height:none"></div>
+    <div class="videos" id="searchVideos" style="margin-top:12px"></div>
   </section>
 
   <div id="normalView">
     <div class="grid" id="categories"></div>
+
+    <section class="section">
+      <div class="section-title">
+        <h2>Видеоинструкции</h2>
+        <span class="muted">Открываются на Яндекс.Диске</span>
+      </div>
+      <div class="videos" id="allVideos"></div>
+    </section>
   </div>
 </main>
 
@@ -127,6 +158,10 @@ main{max-width:1280px;margin:0 auto;padding:28px 5vw 60px}
   <div class="modal-box">
     <h2 id="fmTitle">Файлы</h2>
     <div class="modal-sub" id="fmSub"></div>
+    <div class="tabs" id="fmTabs" style="display:none">
+      <button class="tab active" data-tab="files" type="button">📄 Файлы</button>
+      <button class="tab" data-tab="videos" type="button">🎬 Видео</button>
+    </div>
     <div class="modal-search">
       <input id="fmSearch" placeholder="Быстрый поиск по названию…">
     </div>
@@ -142,314 +177,73 @@ main{max-width:1280px;margin:0 auto;padding:28px 5vw 60px}
 <script>
 /* ============================================================
    ДАННЫЕ САЙТА — ВЕРСИЯ ДЛЯ ПОДРЯДЧИКОВ
-   ------------------------------------------------------------
-   У каждого файла поле "project" — код проекта.
-   Категории (CATEGORIES) — это и есть проекты.
    ============================================================ */
 
 const FILES = [
   /* -------- ЕММ -------- */
-  {
-    name: "ЕММ (вторая).pdf",
-    project: "emm",
-    url: "https://disk.360.yandex.ru/i/WlZcpmW3xMcHSA?download=1",
-    updated: "16.09.2026"
-  },
-  {
-    name: "Логин и пароль от ЕММ.txt",
-    project: "emm",
-    url: "https://disk.360.yandex.ru/i/WlZcpmW3xMcHSA?download=1",
-    updated: "16.09.2026"
-  },
-  {
-    name: "ТЗ по установке ЕММ (первая).pdf",
-    project: "emm",
-    url: "https://disk.360.yandex.ru/i/cKIEMcyDSoImgQ?download=1",
-    updated: "16.09.2026"
-  },
-  {
-    name: "EMM 2.54.5.7z",
-    project: "emm",
-    url: "https://disk.360.yandex.ru/d/LEs4tV9nVhrvmA?download=1",
-    size: "22 МБ",
-    updated: "16.09.2026"
-  },
-  {
-    name: "Акт выполненных работ по ТО+ЕММ.pdf",
-    project: "emm",
-    url: "https://disk.360.yandex.ru/i/t-fuSl9423WnNw?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "ADB.zip",
-    project: "emm",
-    url: "https://disk.360.yandex.ru/d/IbVVQPB-0kGNnw?download=1",
-    size: "75 МБ",
-    updated: "16.09.2026"
-  },
-  {
-    name: "Акт демонтажа.pdf",
-    project: "emm",
-    url: "https://disk.360.yandex.ru/i/URiRo_G-6E1KRA?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Акт осмотра оборудования.pdf",
-    project: "emm",
-    url: "https://disk.360.yandex.ru/i/rTLiBFtxxBn6ug?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Акт технического заключения о неисправности оборудования.pdf",
-    project: "emm",
-    url: "https://disk.360.yandex.ru/i/MQWzAjHBcqIgvw?download=1",
-    updated: "17.09.2026"
-  },
+  {name:"ЕММ (вторая).pdf",                                     project:"emm",       url:"https://disk.360.yandex.ru/i/WlZcpmW3xMcHSA?download=1", updated:"16.09.2026"},
+  {name:"Логин и пароль от ЕММ.txt",                            project:"emm",       url:"https://disk.360.yandex.ru/i/WlZcpmW3xMcHSA?download=1", updated:"16.09.2026"},
+  {name:"ТЗ по установке ЕММ (первая).pdf",                     project:"emm",       url:"https://disk.360.yandex.ru/i/cKIEMcyDSoImgQ?download=1", updated:"16.09.2026"},
+  {name:"EMM 2.54.5.7z",                                        project:"emm",       url:"https://disk.360.yandex.ru/d/LEs4tV9nVhrvmA?download=1", size:"22 МБ", updated:"16.09.2026"},
+  {name:"Акт выполненных работ по ТО+ЕММ.pdf",                  project:"emm",       url:"https://disk.360.yandex.ru/i/t-fuSl9423WnNw?download=1", updated:"17.09.2026"},
+  {name:"ADB.zip",                                              project:"emm",       url:"https://disk.360.yandex.ru/d/IbVVQPB-0kGNnw?download=1", size:"75 МБ", updated:"16.09.2026"},
+  {name:"Акт демонтажа.pdf",                                    project:"emm",       url:"https://disk.360.yandex.ru/i/URiRo_G-6E1KRA?download=1", updated:"17.09.2026"},
+  {name:"Акт осмотра оборудования.pdf",                         project:"emm",       url:"https://disk.360.yandex.ru/i/rTLiBFtxxBn6ug?download=1", updated:"17.09.2026"},
+  {name:"Акт технического заключения о неисправности оборудования.pdf", project:"emm", url:"https://disk.360.yandex.ru/i/MQWzAjHBcqIgvw?download=1", updated:"17.09.2026"},
 
   /* -------- ДП_ПЧ -------- */
-  {
-    name: "ТЗ по проекту ДП_ПЧ в ТКШ V13.pdf",
-    project: "dp_pch",
-    url: "https://disk.360.yandex.ru/i/G7TH_CLtwZHs_w?download=1",
-    updated: "15.09.2026"
-  },
-  {
-    name: "ТЗ по проекту ДП_ПЧ в ЩМ V4.pdf",
-    project: "dp_pch",
-    url: "https://disk.360.yandex.ru/i/BTcmRsMd6hPGqw?download=1",
-    updated: "15.09.2026"
-  },
-  {
-    name: "Пример ФО для проектов ДП_ПЧ/ДП_ПЧ_ДО.pdf",
-    project: "dp_pch",
-    url: "https://disk.360.yandex.ru/i/ALz1ysyTxkiPKw?download=1",
-    updated: "15.09.2026"
-  },
-  {
-    name: "Cubic Cubic 7.7.0 для ДП_ПЧ_ТВ LMC",
-    project: "dp_pch",
-    url: "https://disk.360.yandex.ru/d/H4zLLrOEAP1-qA?download=1",
-    size: "32 МБ",
-    updated: "15.09.2026"
-  },
-  {
-    name: "Cubic 7.7.0 для ДП_ПЧ_ТВ",
-    project: "dp_pch",
-    url: "https://disk.360.yandex.ru/d/3qiFnXPSjJQmLQ?download=1",
-    size: "32 МБ",
-    updated: "15.09.2026"
-  },
-  {
-    name: "Акт о неисправности оборудования ДП_ПЧ.docx",
-    project: "dp_pch",
-    url: "https://disk.360.yandex.ru/i/zy73GMjnCSw5wQ?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Акт о повторном выезде ДП_ПЧ.docx",
-    project: "dp_pch",
-    url: "https://disk.360.yandex.ru/i/J2BRAYLt8rV_Pg?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Акт об отсутствии оборудования ДП_ПЧ.docx",
-    project: "dp_pch",
-    url: "https://disk.360.yandex.ru/i/U-AW76cD1HAEkQ?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Акт приема и ведомость смонтированного оборудования ДП_ПЧ.docx",
-    project: "dp_pch",
-    url: "https://disk.360.yandex.ru/i/lD5grNaw57R3dQ?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Акт типовые проблемы ТТ ДП_ПЧ.docx",
-    project: "dp_pch",
-    url: "https://disk.360.yandex.ru/i/fhniV4_g9uyOAg?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Cubic для МП х32",
-    project: "dp_pch",
-    url: "https://disk.360.yandex.ru/d/s-5bdx0gknqahA?download=1",
-    size: "31 МБ",
-    updated: "15.09.2026"
-  },
-  {
-    name: "Cubic для МП х64",
-    project: "dp_pch",
-    url: "https://disk.360.yandex.ru/d/vcTSw1BPkrhUEg?download=1",
-    size: "31 МБ",
-    updated: "15.09.2026"
-  },
-  {
-    name: "Акт технического заключения о неисправности оборудования.pdf",
-    project: "dp_pch",
-    url: "https://disk.360.yandex.ru/i/MQWzAjHBcqIgvw?download=1",
-    updated: "17.09.2026"
-  },
+  {name:"ТЗ по проекту ДП_ПЧ в ТКШ V13.pdf",                    project:"dp_pch",    url:"https://disk.360.yandex.ru/i/G7TH_CLtwZHs_w?download=1", updated:"15.09.2026"},
+  {name:"ТЗ по проекту ДП_ПЧ в ЩМ V4.pdf",                     project:"dp_pch",    url:"https://disk.360.yandex.ru/i/BTcmRsMd6hPGqw?download=1", updated:"15.09.2026"},
+  {name:"Пример ФО для проектов ДП_ПЧ/ДП_ПЧ_ДО.pdf",           project:"dp_pch",    url:"https://disk.360.yandex.ru/i/ALz1ysyTxkiPKw?download=1", updated:"15.09.2026"},
+  {name:"Cubic Cubic 7.7.0 для ДП_ПЧ_ТВ LMC",                   project:"dp_pch",    url:"https://disk.360.yandex.ru/d/H4zLLrOEAP1-qA?download=1", size:"32 МБ", updated:"15.09.2026"},
+  {name:"Cubic 7.7.0 для ДП_ПЧ_ТВ",                             project:"dp_pch",    url:"https://disk.360.yandex.ru/d/3qiFnXPSjJQmLQ?download=1", size:"32 МБ", updated:"15.09.2026"},
+  {name:"Акт о неисправности оборудования ДП_ПЧ.docx",          project:"dp_pch",    url:"https://disk.360.yandex.ru/i/zy73GMjnCSw5wQ?download=1", updated:"17.09.2026"},
+  {name:"Акт о повторном выезде ДП_ПЧ.docx",                    project:"dp_pch",    url:"https://disk.360.yandex.ru/i/J2BRAYLt8rV_Pg?download=1", updated:"17.09.2026"},
+  {name:"Акт об отсутствии оборудования ДП_ПЧ.docx",            project:"dp_pch",    url:"https://disk.360.yandex.ru/i/U-AW76cD1HAEkQ?download=1", updated:"17.09.2026"},
+  {name:"Акт приема и ведомость смонтированного оборудования ДП_ПЧ.docx", project:"dp_pch", url:"https://disk.360.yandex.ru/i/lD5grNaw57R3dQ?download=1", updated:"17.09.2026"},
+  {name:"Акт типовые проблемы ТТ ДП_ПЧ.docx",                    project:"dp_pch",    url:"https://disk.360.yandex.ru/i/fhniV4_g9uyOAg?download=1", updated:"17.09.2026"},
+  {name:"Cubic для МП х32",                                     project:"dp_pch",    url:"https://disk.360.yandex.ru/d/s-5bdx0gknqahA?download=1", size:"31 МБ", updated:"15.09.2026"},
+  {name:"Cubic для МП х64",                                     project:"dp_pch",    url:"https://disk.360.yandex.ru/d/vcTSw1BPkrhUEg?download=1", size:"31 МБ", updated:"15.09.2026"},
+  {name:"Акт технического заключения о неисправности оборудования.pdf", project:"dp_pch", url:"https://disk.360.yandex.ru/i/MQWzAjHBcqIgvw?download=1", updated:"17.09.2026"},
 
   /* -------- ДП_ПЧ_ДО -------- */
-  {
-    name: "Акт приема-передачи давальческого оборудования ДП_ПЧ_ДО.docx",
-    project: "dp_pch_do",
-    url: "https://disk.360.yandex.ru/i/rL3snTad5UrzjA?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Cubic для МП х32",
-    project: "dp_pch_do",
-    url: "https://disk.360.yandex.ru/d/s-5bdx0gknqahA?download=1",
-    size: "31 МБ",
-    updated: "15.09.2026"
-  },
-  {
-    name: "Cubic для МП х64",
-    project: "dp_pch_do",
-    url: "https://disk.360.yandex.ru/d/vcTSw1BPkrhUEg?download=1",
-    size: "31 МБ",
-    updated: "15.09.2026"
-  },
-  {
-    name: "Акт технического заключения о неисправности оборудования.pdf",
-    project: "dp_pch_do",
-    url: "https://disk.360.yandex.ru/i/MQWzAjHBcqIgvw?download=1",
-    updated: "17.09.2026"
-  },
+  {name:"Акт приема-передачи давальческого оборудования ДП_ПЧ_ДО.docx", project:"dp_pch_do", url:"https://disk.360.yandex.ru/i/rL3snTad5UrzjA?download=1", updated:"17.09.2026"},
+  {name:"Инструкция для новичков по проекту ДП_ПЧ_ДО.docx",     project:"dp_pch_do", url:"https://disk.360.yandex.ru/i/Sbil02_kDsD_6A?download=1", updated:"16.09.2026"},
+  {name:"Cubic для МП х32",                                     project:"dp_pch_do", url:"https://disk.360.yandex.ru/d/s-5bdx0gknqahA?download=1", size:"31 МБ", updated:"15.09.2026"},
+  {name:"Cubic для МП х64",                                     project:"dp_pch_do", url:"https://disk.360.yandex.ru/d/vcTSw1BPkrhUEg?download=1", size:"31 МБ", updated:"15.09.2026"},
+  {name:"Акт технического заключения о неисправности оборудования.pdf", project:"dp_pch_do", url:"https://disk.360.yandex.ru/i/MQWzAjHBcqIgvw?download=1", updated:"17.09.2026"},
 
   /* -------- ЛЕНТА -------- */
-  {
-    name: "ТЗ по проекту Лента СМ 43.pdf",
-    project: "lenta",
-    url: "https://disk.360.yandex.ru/i/ekQb9yEdSscQJg?download=1",
-    updated: "15.09.2026"
-  },
-  {
-    name: "ТЗ по проекту Лента ГМ 50.pdf",
-    project: "lenta",
-    url: "https://disk.360.yandex.ru/i/GRgiRi1O-mQdYQ?download=1",
-    updated: "15.09.2026"
-  },
-  {
-    name: "Акт по Ленте.docx",
-    project: "lenta",
-    url: "https://disk.360.yandex.ru/i/s0NrBogv75Fj_Q?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Акт срыва монтажа Лента.docx",
-    project: "lenta",
-    url: "https://disk.360.yandex.ru/i/QH1HH0CrxbHsNA?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Акт АВР ПАО Вымпелком",
-    project: "lenta",
-    url: "https://disk.360.yandex.ru/i/cRHnrXU6e2lunQ?download=1",
-    updated: "17.09.2026"
-  },
+  {name:"ТЗ по проекту Лента СМ 43.pdf",                        project:"lenta",     url:"https://disk.360.yandex.ru/i/ekQb9yEdSscQJg?download=1", updated:"15.09.2026"},
+  {name:"ТЗ по проекту Лента ГМ 50.pdf",                        project:"lenta",     url:"https://disk.360.yandex.ru/i/GRgiRi1O-mQdYQ?download=1", updated:"15.09.2026"},
+  {name:"Акт по Ленте.docx",                                    project:"lenta",     url:"https://disk.360.yandex.ru/i/s0NrBogv75Fj_Q?download=1", updated:"17.09.2026"},
+  {name:"Акт срыва монтажа Лента.docx",                         project:"lenta",     url:"https://disk.360.yandex.ru/i/QH1HH0CrxbHsNA?download=1", updated:"17.09.2026"},
+  {name:"Акт АВР ПАО Вымпелком",                                project:"lenta",     url:"https://disk.360.yandex.ru/i/cRHnrXU6e2lunQ?download=1", updated:"17.09.2026"},
 
   /* -------- МЕТРО -------- */
-  {
-    name: "ТЗ по проекту ГМ Метро 32 V2.pdf",
-    project: "metro",
-    url: "https://disk.360.yandex.ru/i/6PYHcPPR5u4dXw?download=1",
-    updated: "15.09.2026"
-  },
-  {
-    name: "Акт приема-передачи Метро.docx",
-    project: "metro",
-    url: "https://disk.360.yandex.ru/i/R9TxUKgpJ3jp4g?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Акт установки инвентаря МЕТРО.docx",
-    project: "metro",
-    url: "https://disk.360.yandex.ru/i/6kANC-7cj_0bKg?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Акт АВР ПАО Вымпелком",
-    project: "metro",
-    url: "https://disk.360.yandex.ru/i/cRHnrXU6e2lunQ?download=1",
-    updated: "17.09.2026"
-  },
+  {name:"ТЗ по проекту ГМ Метро 32 V2.pdf",                     project:"metro",     url:"https://disk.360.yandex.ru/i/6PYHcPPR5u4dXw?download=1", updated:"15.09.2026"},
+  {name:"Акт приема-передачи Метро.docx",                       project:"metro",     url:"https://disk.360.yandex.ru/i/R9TxUKgpJ3jp4g?download=1", updated:"17.09.2026"},
+  {name:"Акт установки инвентаря МЕТРО.docx",                   project:"metro",     url:"https://disk.360.yandex.ru/i/6kANC-7cj_0bKg?download=1", updated:"17.09.2026"},
+  {name:"Акт АВР ПАО Вымпелком",                                project:"metro",     url:"https://disk.360.yandex.ru/i/cRHnrXU6e2lunQ?download=1", updated:"17.09.2026"},
 
   /* -------- МАГНИТ АПТЕКИ -------- */
-  {
-    name: "ТЗ по проекту Магнит Аптеки.pdf",
-    project: "magnit",
-    url: "https://disk.360.yandex.ru/i/p4y9jy5zSxp6OQ?download=1",
-    updated: "15.09.2026"
-  },
-  {
-    name: "Cubic 7.7.0 apax для ДП в Магнит Аптеках",
-    project: "magnit",
-    url: "https://disk.360.yandex.ru/d/4Yjx0rLtAABLiw?download=1",
-    size: "32 МБ",
-    updated: "15.09.2026"
-  },
+  {name:"ТЗ по проекту Магнит Аптеки.pdf",                      project:"magnit",    url:"https://disk.360.yandex.ru/i/p4y9jy5zSxp6OQ?download=1", updated:"15.09.2026"},
+  {name:"Cubic 7.7.0 apax для ДП в Магнит Аптеках",             project:"magnit",    url:"https://disk.360.yandex.ru/d/4Yjx0rLtAABLiw?download=1", size:"32 МБ", updated:"15.09.2026"},
 
   /* -------- ФАСАДНЫЕ ЭКРАНЫ -------- */
-  {
-    name: "ТЗ по проекту Фасадные экраны(V6).pdf",
-    project: "fasad",
-    url: "https://disk.360.yandex.ru/i/lgZkruPjxKBC8A?download=1",
-    updated: "15.09.2026"
-  },
-  {
-    name: "Акт обследования точки Фасадники.docx",
-    project: "fasad",
-    url: "https://disk.360.yandex.ru/i/GMsWhnmc_lkIOA?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Акт приема системы в эксплуатацию Фасадники.docx",
-    project: "fasad",
-    url: "https://disk.360.yandex.ru/i/xOsyMq-_ruvMJw?download=1",
-    updated: "17.09.2026"
-  },
+  {name:"ТЗ по проекту Фасадные экраны(V6).pdf",                project:"fasad",     url:"https://disk.360.yandex.ru/i/lgZkruPjxKBC8A?download=1", updated:"15.09.2026"},
+  {name:"Акт обследования точки Фасадники.docx",               project:"fasad",     url:"https://disk.360.yandex.ru/i/GMsWhnmc_lkIOA?download=1", updated:"17.09.2026"},
+  {name:"Акт приема системы в эксплуатацию Фасадники.docx",     project:"fasad",     url:"https://disk.360.yandex.ru/i/xOsyMq-_ruvMJw?download=1", updated:"17.09.2026"},
 
   /* -------- ШЕЛФБАННЕРЫ -------- */
-  {
-    name: "ТЗ по проекту Шелфбаннеры(V6).pdf",
-    project: "shelf",
-    url: "https://disk.360.yandex.ru/i/2eFme6CEUnTgpQ?download=1",
-    updated: "19.09.2026"
-  },
-  {
-    name: "Акт приема системы в эксплуатацию Шелфбаннеры.docx",
-    project: "shelf",
-    url: "https://disk.360.yandex.ru/i/d0tcLHvmmLZouw?download=1",
-    updated: "17.09.2026"
-  },
+  {name:"ТЗ по проекту Шелфбаннеры(V5).pdf",                    project:"shelf",     url:"https://disk.360.yandex.ru/i/mpYa5BP0b1M3DA?download=1", updated:"15.09.2026"},
+  {name:"Акт приема системы в эксплуатацию Шелфбаннеры.docx",   project:"shelf",     url:"https://disk.360.yandex.ru/i/d0tcLHvmmLZouw?download=1", updated:"17.09.2026"},
 
   /* -------- ФАСОЛЬ -------- */
-  {
-    name: "ТЗ по проекту Фасоль.pdf",
-    project: "fasol",
-    url: "https://disk.360.yandex.ru/i/NQ_Uv7MVijUkBQ?download=1",
-    updated: "15.09.2026"
-  },
-  {
-    name: "Акт ТН Фасоль 32 диагональ.pdf",
-    project: "fasol",
-    url: "https://disk.360.yandex.ru/i/GHxahqDaVUC6Rg?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Акт ТН Фасоль 43 диагональ.pdf",
-    project: "fasol",
-    url: "https://disk.360.yandex.ru/i/EZKhQPGEG-72Ww?download=1",
-    updated: "17.09.2026"
-  },
-  {
-    name: "Акт Фасоль.docx",
-    project: "fasol",
-    url: "https://disk.360.yandex.ru/i/XBgnewWcIypQ8A?download=1",
-    updated: "17.09.2026"
-  }
+  {name:"ТЗ по проекту Фасоль.pdf",                             project:"fasol",     url:"https://disk.360.yandex.ru/i/NQ_Uv7MVijUkBQ?download=1", updated:"15.09.2026"},
+  {name:"Акт ТН Фасоль 32 диагональ.pdf",                       project:"fasol",     url:"https://disk.360.yandex.ru/i/GHxahqDaVUC6Rg?download=1", updated:"17.09.2026"},
+  {name:"Акт ТН Фасоль 43 диагональ.pdf",                       project:"fasol",     url:"https://disk.360.yandex.ru/i/EZKhQPGEG-72Ww?download=1", updated:"17.09.2026"},
+  {name:"Акт Фасоль.docx",                                      project:"fasol",     url:"https://disk.360.yandex.ru/i/XBgnewWcIypQ8A?download=1", updated:"17.09.2026"}
 ];
 
 /* ============================================================
@@ -457,18 +251,191 @@ const FILES = [
    ============================================================ */
 
 const CATEGORIES = [
-  {id:"emm",       title:"ЕММ",                     icon:"📦"},
-  {id:"dp_pch",    title:"ДП_ПЧ",                   icon:"📦"},
-  {id:"dp_pch_do", title:"ДП_ПЧ_ДО",                icon:"📦"},
-  {id:"lenta",     title:"Лента",                   icon:"🏬"},
-  {id:"metro",     title:"Метро",                   icon:"🚇"},
-  {id:"magnit",    title:"Магнит Аптеки",           icon:"💊"},
-  {id:"fasad",     title:"Фасадные экраны",         icon:"🏢"},
-  {id:"shelf",     title:"Шелфбаннеры",             icon:"🪧"},
-  {id:"fasol",     title:"Фасоль",                  icon:"🌰"},
+  {id:"emm",       title:"ЕММ",              icon:"📦"},
+  {id:"dp_pch",    title:"ДП_ПЧ",            icon:"📦"},
+  {id:"dp_pch_do", title:"ДП_ПЧ_ДО",         icon:"📦"},
+  {id:"lenta",     title:"Лента",            icon:"🏬"},
+  {id:"metro",     title:"Метро",            icon:"🚇"},
+  {id:"magnit",    title:"Магнит Аптеки",    icon:"💊"},
+  {id:"fasad",     title:"Фасадные экраны",  icon:"🏢"},
+  {id:"shelf",     title:"Шелфбаннеры",      icon:"🪧"},
+  {id:"fasol",     title:"Фасоль",           icon:"🌰"}
 ];
 
-/* ---------- утилиты ---------- */
+/* ============================================================
+   ВИДЕОИНСТРУКЦИИ — привязка к проектам
+   ============================================================ */
+
+const VIDEOS = [
+  /* -------- ШЕЛФБАННЕРЫ -------- */
+  {
+    name: "Синхронизация ориентации матриц ШБ.mp4",
+    project: "shelf",
+    description: "Видео по синхронизации ориентации матриц на Шелфбаннерах",
+    url: "https://disk.360.yandex.ru/i/R0xjrLVxu9CHuw",
+    duration: "01:25"
+  },
+  {
+    name: "Крепление петли к ШБ и уголку.mp4",
+    project: "shelf",
+    description: "Крепеж петли к Шелфбаннеру и уголку",
+    url: "https://disk.360.yandex.ru/i/zkB9BkW6MgqcQQ",
+    duration: "00:08"
+  },
+  {
+    name: "Крепление петли к ШБ.mp4",
+    project: "shelf",
+    description: "Крепеж петли к Шелфбаннеру",
+    url: "https://disk.360.yandex.ru/i/Jc2aagtfhLfsuA",
+    duration: "00:10"
+  },
+  {
+    name: "Монтаж петель на ШБ.mp4",
+    project: "shelf",
+    description: "Монтаж петель на Шелфбаннер",
+    url: "https://disk.360.yandex.ru/i/pBnpqni01xoPnw",
+    duration: "00:25"
+  },
+  {
+    name: "Настройка петель 1.mp4",
+    project: "shelf",
+    description: "Настройка петель 1",
+    url: "https://disk.360.yandex.ru/i/rijUPrYODINDJQ",
+    duration: "01:33"
+  },
+  {
+    name: "Настройка петли 2.mp4",
+    project: "shelf",
+    description: "Настройка петель 2",
+    url: "https://disk.360.yandex.ru/i/cjeaEOsnAH18kg",
+    duration: "01:49"
+  },
+  {
+    name: "Установка ЕММ на ШБ.mp4",
+    project: "shelf",
+    description: "Установка ЕММ на Шелфбаннер",
+    url: "https://disk.360.yandex.ru/i/qPI12dVo4DowwQ",
+    duration: "02:50"
+  },
+  {
+    name: "Подключение управляющего ПК к экрану.mp4",
+    project: "shelf",
+    description: "Подключение управляющего ПК к Шелфбаннеру",
+    url: "https://disk.360.yandex.ru/i/VtrpCPF7i5xw6A",
+    duration: "03:05"
+  },
+  {
+    name: "Пример подключения кабелей.mp4",
+    project: "shelf",
+    description: "Пример подключения кабелей",
+    url: "https://disk.360.yandex.ru/i/iPLDe726ZwFGvQ",
+    duration: "00:21"
+  },
+  {
+    name: "Подключение кабелей.mp4",
+    project: "shelf",
+    description: "Подключение кабелей",
+    url: "https://disk.360.yandex.ru/i/jeNTf9YRxqp5sA",
+    duration: "00:08"
+  },
+
+  /* -------- ФАСАДНЫЕ ЭКРАНЫ -------- */
+  {
+    name: "Установка ПО и активация ЕММ.mp4",
+    project: "fasad",
+    description: "Установка ПО и активация ЕММ на ФЭ",
+    url: "https://disk.360.yandex.ru/i/pEFOUsgD_nR4Pg",
+    duration: "02:15"
+  },
+  {
+    name: "Настройка таймера.MOV",
+    project: "fasad",
+    description: "Настройка таймера на ФЭ",
+    url: "https://disk.360.yandex.ru/i/enXW4i3RTYQ4AQ",
+    duration: "01:19"
+  },
+
+  /* -------- ДП_ПЧ -------- */
+  {
+    name: "Видео настройки CMA-120.mp4",
+    project: "dp_pch",
+    description: "Видео настройки усилителя CMA-120",
+    url: "https://disk.360.yandex.ru/i/mE0SOYZY0hLwaA",
+    duration: "02:56"
+  },
+
+  /* -------- ДП_ПЧ_ДО -------- */
+  {
+    name: "Видео настройки CMA-120.mp4",
+    project: "dp_pch_do",
+    description: "Видео настройки усилителя CMA-120",
+    url: "https://disk.360.yandex.ru/i/mE0SOYZY0hLwaA",
+    duration: "02:56"
+  },
+
+  /* -------- ЕММ -------- */
+  {
+    name: "Установка ЕММ на ДП 1 вариант ревизии.mp4",
+    project: "emm",
+    description: "Установка ЕММ на ДП 1 вариант ревизии",
+    url: "https://disk.360.yandex.ru/i/Rm6cGLPPQj0AKg",
+    duration: "01:34"
+  },
+  {
+    name: "Установка ЕММ на ДП 2 вариант ревизии.mp4",
+    project: "emm",
+    description: "Установка ЕММ на ДП 2 вариант ревизии",
+    url: "https://disk.360.yandex.ru/i/eGl-bA5JuuYKnA",
+    duration: "01:54"
+  },
+  {
+    name: "Установка ЕММ на ПЧ.mp4",
+    project: "emm",
+    description: "Установка ЕММ на прайс-чекер",
+    url: "https://disk.360.yandex.ru/i/C9Bjbh88NbhSHg",
+    duration: "05:25"
+  },
+  {
+    name: "Установка ЕММ на ДП по WiFi.mp4",
+    project: "emm",
+    description: "Установка ЕММ на ДП по WiFi",
+    url: "https://disk.360.yandex.ru/i/6H4Y0NmlG3Fb5Q",
+    duration: "05:10"
+  },
+  {
+    name: "Установка ЕММ на ФЭ.mp4",
+    project: "emm",
+    description: "Установка ЕММ на Фасадный экран",
+    url: "https://disk.360.yandex.ru/i/Y-CAMHuHURM6uQ",
+    duration: "02:45"
+  },
+  {
+    name: "Установка ЕММ на ТВ.mp4",
+    project: "emm",
+    description: "Установка ЕММ на ТВ-панель",
+    url: "https://disk.360.yandex.ru/i/Y66_R_43qIViXw",
+    duration: "02:20"
+  },
+  {
+    name: "Устанвока Cubic Vision на ТВ.mp4",
+    project: "emm",
+    description: "Устанвока Cubic Vision на ТВ-панель",
+    url: "https://disk.360.yandex.ru/i/TWeL6VozifJwHg",
+    duration: "01:39"
+  },
+  {
+    name: "Устанвока Cubic Vision на ТВ ADTS.mp4",
+    project: "emm",
+    description: "Устанвока Cubic Vision на ТВ-панель марки ADTS",
+    url: "https://disk.360.yandex.ru/i/g1cUZx1w8ZzchA",
+    duration: "01:36"
+  }
+];
+
+/* ============================================================
+   УТИЛИТЫ
+   ============================================================ */
+
 function esc(s){
   return String(s == null ? "" : s).replace(/[&<>"']/g, m => ({
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
@@ -498,7 +465,6 @@ function fileIcon(name){
   return "📄";
 }
 
-/* ---------- кэш ссылок на DOM ---------- */
 const $ = id => document.getElementById(id);
 const els = {
   categories: $("categories"),
@@ -508,10 +474,13 @@ const els = {
   fmSub:      $("fmSub"),
   fmSearch:   $("fmSearch"),
   fmList:     $("fmList"),
+  fmTabs:     $("fmTabs"),
   filesModal: $("filesModal"),
   toast:      $("toast"),
   errbox:     $("errbox")
 };
+
+function catById(id){ return CATEGORIES.find(c => c.id === id); }
 
 /* ---------- карточка файла ---------- */
 function buildFileItem(f){
@@ -531,30 +500,68 @@ function buildFileItem(f){
   return item;
 }
 
+/* ---------- карточка видео ---------- */
+function buildVideoCard(v){
+  const a = document.createElement("a");
+  a.className = "video-card";
+  a.href = v.url;
+  a.target = "_blank";
+  a.rel = "noopener";
+  const cat = catById(v.project);
+  const meta = [];
+  if (v.duration) meta.push('<span class="v-dur">' + esc(v.duration) + '</span>');
+  if (cat) meta.push('<span class="v-proj">' + esc(cat.icon + " " + cat.title) + '</span>');
+  a.innerHTML =
+    '<div class="v-icon"></div>' +
+    '<div class="v-main">' +
+      '<div class="v-name">' + esc(v.name) + '</div>' +
+      (v.description ? '<div class="v-desc">' + esc(v.description) + '</div>' : '') +
+      (meta.length ? '<div class="v-meta">' + meta.join("") + '</div>' : '') +
+    '</div>';
+  return a;
+}
+
 /* ---------- рендер главной ---------- */
 function renderCategories(){
   els.categories.innerHTML = "";
   const frag = document.createDocumentFragment();
   CATEGORIES.forEach(c => {
-    const count = FILES.filter(f => f.project === c.id).length;
+    const fc = FILES.filter(f => f.project === c.id).length;
+    const vc = VIDEOS.filter(v => v.project === c.id).length;
+    const parts = [];
+    if (fc) parts.push(fc + " " + plural(fc, ["файл","файла","файлов"]));
+    if (vc) parts.push(vc + " " + plural(vc, ["видео","видео","видео"]));
     const card = document.createElement("div");
     card.className = "card";
     card.setAttribute("data-cat", c.id);
     card.innerHTML =
       '<div class="icon">' + esc(c.icon) + '</div>' +
       '<h3>' + esc(c.title) + '</h3>' +
-      '<div class="muted">' + count + ' ' + plural(count, ["файл","файла","файлов"]) + '</div>';
+      '<div class="muted">' + (parts.length ? esc(parts.join(" · ")) : "Материалов нет") + '</div>';
     frag.appendChild(card);
   });
   els.categories.appendChild(frag);
 }
 
+function renderAllVideos(){
+  const box = $("allVideos");
+  box.innerHTML = "";
+  if (!VIDEOS.length){
+    box.innerHTML = '<div class="empty">Видео пока нет</div>';
+    return;
+  }
+  const frag = document.createDocumentFragment();
+  VIDEOS.forEach(v => frag.appendChild(buildVideoCard(v)));
+  box.appendChild(frag);
+}
+
 function renderStatus(){
-  els.status.textContent = "Проектов: " + CATEGORIES.length + " • файлов: " + FILES.length;
+  els.status.textContent = "Проектов: " + CATEGORIES.length + " • файлов: " + FILES.length + " • видео: " + VIDEOS.length;
 }
 
 function render(){
   renderCategories();
+  renderAllVideos();
   renderStatus();
 }
 
@@ -564,6 +571,7 @@ function renderSearchResults(){
   const searchSection = document.getElementById("searchSection");
   const normalView    = document.getElementById("normalView");
   const searchFiles   = document.getElementById("searchFiles");
+  const searchVideos  = document.getElementById("searchVideos");
   const searchCount   = document.getElementById("searchCount");
 
   if (!q){
@@ -575,9 +583,8 @@ function renderSearchResults(){
   searchSection.style.display = "";
   normalView.style.display = "none";
 
-  /* Ищем по имени, описанию, размеру, дате и названию проекта */
   const files = FILES.filter(f => {
-    const cat = CATEGORIES.find(c => c.id === f.project);
+    const cat = catById(f.project);
     const projectTitle = cat ? cat.title : "";
     const text = (
       (f.name || "") + " " +
@@ -589,29 +596,71 @@ function renderSearchResults(){
     return text.includes(q);
   });
 
-  searchCount.textContent = files.length
-    ? "Найдено: " + files.length + " " + plural(files.length, ["файл","файла","файлов"])
+  const videos = VIDEOS.filter(v => {
+    const cat = catById(v.project);
+    const projectTitle = cat ? cat.title : "";
+    const text = (
+      (v.name || "") + " " +
+      (v.description || "") + " " +
+      (v.duration || "") + " " +
+      projectTitle
+    ).toLowerCase();
+    return text.includes(q);
+  });
+
+  const total = files.length + videos.length;
+  searchCount.textContent = total
+    ? "Найдено: " + total + " (" + files.length + " файлов, " + videos.length + " видео)"
     : "Ничего не найдено";
 
   searchFiles.innerHTML = "";
+  searchVideos.innerHTML = "";
+
   if (files.length){
     const frag = document.createDocumentFragment();
     files.forEach(f => frag.appendChild(buildFileItem(f)));
     searchFiles.appendChild(frag);
-  } else {
+  }
+
+  if (videos.length){
+    const frag = document.createDocumentFragment();
+    videos.forEach(v => frag.appendChild(buildVideoCard(v)));
+    searchVideos.appendChild(frag);
+  }
+
+  if (!files.length && !videos.length){
     searchFiles.innerHTML = '<div class="empty">По запросу «' + esc(q) + '» ничего не найдено</div>';
   }
 }
 
-/* ---------- модалка со списком файлов проекта ---------- */
+/* ---------- модалка проекта ---------- */
 let currentCategory = null;
+let currentTab = "files";
 
 function openFilesModal(categoryId){
   currentCategory = categoryId;
-  const cat = CATEGORIES.find(c => c.id === categoryId);
+  currentTab = "files";
+  const cat = catById(categoryId);
   els.fmTitle.textContent = (cat ? cat.icon + " " + cat.title : "Файлы");
-  const total = FILES.filter(f => f.project === categoryId).length;
-  els.fmSub.textContent = "Всего файлов: " + total + " · клик по файлу — начать скачивание";
+
+  const fc = FILES.filter(f => f.project === categoryId).length;
+  const vc = VIDEOS.filter(v => v.project === categoryId).length;
+  const parts = [];
+  if (fc) parts.push(fc + " " + plural(fc, ["файл","файла","файлов"]));
+  if (vc) parts.push(vc + " " + plural(vc, ["видео","видео","видео"]));
+  els.fmSub.textContent = parts.join(" · ");
+
+  /* Показываем вкладки, только если у проекта есть и файлы, и видео */
+  if (fc && vc){
+    els.fmTabs.style.display = "";
+    els.fmTabs.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    els.fmTabs.querySelector('.tab[data-tab="files"]').classList.add("active");
+  } else {
+    els.fmTabs.style.display = "none";
+    /* Если только видео — сразу открываем вкладку видео */
+    if (!fc && vc) currentTab = "videos";
+  }
+
   els.fmSearch.value = "";
   renderFilesModal();
   els.filesModal.classList.add("show");
@@ -626,24 +675,48 @@ function closeFilesModal(){
 function renderFilesModal(){
   if (!currentCategory) return;
   const q = els.fmSearch.value.toLowerCase().trim();
+
+  if (currentTab === "videos"){
+    const list = VIDEOS.filter(v =>
+      v.project === currentCategory &&
+      (!q || (v.name + " " + (v.description || "")).toLowerCase().includes(q))
+    );
+    els.fmList.innerHTML = "";
+    if (!list.length){
+      els.fmList.innerHTML = '<div class="empty">Видео не найдено</div>';
+      return;
+    }
+    const wrap = document.createElement("div");
+    wrap.className = "videos";
+    list.forEach(v => wrap.appendChild(buildVideoCard(v)));
+    els.fmList.appendChild(wrap);
+    return;
+  }
+
   const list = FILES.filter(f =>
     f.project === currentCategory &&
     (!q || (f.name + " " + (f.description || "")).toLowerCase().includes(q))
   );
-
   els.fmList.innerHTML = "";
   if (!list.length){
-    const empty = document.createElement("div");
-    empty.className = "empty";
-    empty.textContent = "Ничего не найдено";
-    els.fmList.appendChild(empty);
+    els.fmList.innerHTML = '<div class="empty">Файлов не найдено</div>';
     return;
   }
-
   const frag = document.createDocumentFragment();
   list.forEach(f => frag.appendChild(buildFileItem(f)));
   els.fmList.appendChild(frag);
 }
+
+/* ---------- переключение вкладок ---------- */
+els.fmTabs.addEventListener("click", e => {
+  const tab = e.target.closest(".tab");
+  if (!tab) return;
+  currentTab = tab.getAttribute("data-tab");
+  els.fmTabs.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  tab.classList.add("active");
+  els.fmSearch.value = "";
+  renderFilesModal();
+});
 
 /* ---------- скачивание ---------- */
 function downloadFile(url, name){
@@ -652,7 +725,6 @@ function downloadFile(url, name){
     return;
   }
   toast("Скачивание началось\n" + name);
-
   const a = document.createElement("a");
   a.href = url;
   a.rel = "noopener";
@@ -662,13 +734,12 @@ function downloadFile(url, name){
       a.download = name;
     }
   } catch(e){ /* ignore */ }
-
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
 }
 
-/* ---------- делегирование событий ---------- */
+/* ---------- делегирование ---------- */
 document.addEventListener("click", e => {
   const card = e.target.closest(".card[data-cat]");
   if (card) { openFilesModal(card.getAttribute("data-cat")); return; }
@@ -714,7 +785,7 @@ function toast(s){
   toastTimer = setTimeout(() => { els.toast.style.display = "none"; }, 2600);
 }
 
-/* ---------- старт с защитой от ошибок ---------- */
+/* ---------- старт ---------- */
 try {
   render();
 } catch (err){
@@ -723,7 +794,7 @@ try {
     els.errbox.className = "errbox";
     els.errbox.textContent =
       "Ошибка в данных сайта:\n" + (err && err.message ? err.message : String(err)) +
-      "\n\nПроверьте массив FILES — чаще всего это пропущенная запятая между объектами.";
+      "\n\nПроверьте массивы FILES и VIDEOS — чаще всего это пропущенная запятая.";
   }
 }
 </script>
